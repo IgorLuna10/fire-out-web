@@ -687,6 +687,9 @@ function cartSendWA() {
   else if (runningTotal > 0)           lines += 'Total: ' + fmtBRL(runningTotal) + '\n';
   else                                  lines += 'Todos os itens são Sob Consulta.\n';
   lines += '\nAguardo retorno. Obrigado!';
+  if (typeof gtag === 'function') {
+    gtag('event', 'conversion', { 'send_to': 'AW-18224608696/GgOaC0ui1u0cELjrlfJD' });
+  }
   window.open('https://wa.me/5521966969836?text=' + encodeURIComponent(lines), '_blank');
 }
 

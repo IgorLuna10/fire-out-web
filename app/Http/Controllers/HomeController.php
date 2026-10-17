@@ -7,14 +7,14 @@ class HomeController extends Controller
     public function index()
     {
         $clientes = [
-            ['nome' => 'Hospital São Gonçalo', 'logo' => 'hospital.png'],
-            ['nome' => 'Hospital Icaraí',      'logo' => 'hospital2.png'],
-            ['nome' => 'Amoedo',               'logo' => 'amoedo-logo.png'],
-            ['nome' => 'Distac Volkswagen',    'logo' => 'distac-logo.png'],
-            ['nome' => 'Unimed',               'logo' => 'unimed-logo.png'],
-            ['nome' => 'Frescatto',            'logo' => 'frescatto-logo.png'],
-            ['nome' => 'Fundação Atauvo de Paiva', 'logo' => 'FAP-logo.png'],
-            ['nome' => 'Viação Redentor',      'logo' => 'redentor-logo.png'],
+            ['nome' => 'Hospital São Gonçalo', 'logo' => 'hospital.webp'],
+            ['nome' => 'Hospital Icaraí',      'logo' => 'hospital2.webp'],
+            ['nome' => 'Amoedo',               'logo' => 'amoedo-logo.webp'],
+            ['nome' => 'Distac Volkswagen',    'logo' => 'distac-logo.webp'],
+            ['nome' => 'Unimed',               'logo' => 'unimed-logo.webp'],
+            ['nome' => 'Frescatto',            'logo' => 'frescatto-logo.webp'],
+            ['nome' => 'Fundação Atauvo de Paiva', 'logo' => 'FAP-logo.webp'],
+            ['nome' => 'Viação Redentor',      'logo' => 'redentor-logo.webp'],
         ];
 
         return view('pages.home', compact('clientes'));

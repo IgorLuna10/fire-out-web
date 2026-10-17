@@ -128,7 +128,7 @@
 .login-right-img {
   position: absolute;
   inset: 0;
-  background-image: url('{{ asset("img/fire out images/foraAcao.jpg") }}');
+  background-image: url('{{ asset("img/fire out images/foraAcao.webp") }}');
   background-size: cover;
   background-position: center 30%;
   opacity: .15;

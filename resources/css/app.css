@@ -6,15 +6,15 @@
 
 /* ── TOKENS ── */
 :root {
-  --red:      #D72B2B;
+  --red:      #C22020;
   --red-d:    #A31F1F;
   --red-l:    #FF4040;
   --ink:      #1A1A1A;
   --off:      #F5F2ED;
-  --warm:     #8A8278;
+  --warm:     #544E48;
   --lt-gray:  #EBEBEB;
   --white:    #FFFFFF;
-  --nav-h:    96px;
+  --nav-h:    110px;
   --ease:     cubic-bezier(.4,0,.2,1);
   --r-sm:     6px;
   --r-md:     10px;
@@ -60,15 +60,15 @@ button { font-family:inherit; cursor:pointer; border:none; background:none; }
 }
 .nav-links { display:flex; align-items:center; gap:32px; }
 .nav-links a {
-  font-size:14px; font-weight:500; color:var(--ink); opacity:.65;
+  font-size:15px; font-weight:500; color:var(--ink); opacity:.7;
   transition:opacity .2s; white-space:nowrap;
 }
 .nav-links a:hover { opacity:1; }
-.nav-links a.active { opacity:1; color:var(--red); }
+.nav-links a.active { opacity:1; color:var(--red); font-weight:600; }
 .nav-links .btn-nav {
   background:var(--red); color:#fff !important; opacity:1 !important;
-  padding:9px 20px; border-radius:var(--r-sm);
-  font-size:13px; font-weight:600; transition:background .2s;
+  padding:11px 22px; border-radius:var(--r-sm);
+  font-size:14px; font-weight:600; transition:background .2s;
 }
 .nav-links .btn-nav:hover { background:var(--red-d); }
 .nav-hamburger {
@@ -172,7 +172,7 @@ button { font-family:inherit; cursor:pointer; border:none; background:none; }
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(32px,3.5vw,46px); letter-spacing:1px; color:#fff; margin-bottom:8px;
 }
-.cta-banner p { font-size:16px; color:rgba(255,255,255,.72); }
+.cta-banner p { font-size:16px; color:#ffffff; }
 
 /* ── FOOTER ── */
 .fo-footer { background:var(--ink); color:rgba(255,255,255,.55); padding:64px 0 28px; }
@@ -186,7 +186,7 @@ button { font-family:inherit; cursor:pointer; border:none; background:none; }
   color:#fff; margin-bottom:14px;
 }
 .f-brand-desc { font-size:14px; line-height:1.8; max-width:260px; }
-.fo-footer h4 {
+.fo-footer h3, .fo-footer h4 {
   font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
   color:#fff; margin-bottom:18px;
 }

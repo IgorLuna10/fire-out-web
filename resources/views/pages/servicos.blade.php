@@ -190,7 +190,7 @@
 <div class="page-hero">
   <div class="page-hero-inner">
     <div class="page-hero-logo">
-      <img src="{{ asset('img/logo/dark-logo.png') }}" alt="Fire Out">
+      <img src="{{ asset('img/logo/dark-logo.webp') }}" alt="Fire Out" width="140" height="140">
     </div>
     <div>
       <div class="hero-eyebrow">Engenharia de Combate a Incêndio</div>
@@ -327,7 +327,7 @@
   <div class="page-wrap">
     <div class="dif-grid">
       <div class="dif-img">
-        <img src="{{ asset('img/fire out images/computador-imagem.png') }}" alt="Equipe Fire Out">
+        <img src="{{ asset('img/fire out images/computador-imagem.webp') }}" alt="Equipe Fire Out" width="1000" height="540" loading="lazy">
       </div>
       <div>
         <div class="s-label">Por que a Fire Out</div>
@@ -353,14 +353,14 @@
       <h2 class="s-title">QUEM CONFIA NA FIRE OUT</h2>
     </div>
     <div class="logo-strip">
-      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/hospital.png') }}"    alt="Hospital"></div>
-      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/hospital2.png') }}"   alt="Hospital Icaraí"></div>
-      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/amoedo-logo.png') }}" alt="Amoedo"></div>
-      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/distac-logo.png') }}" alt="Distac"></div>
-      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/unimed-logo.png') }}" alt="Unimed"></div>
-      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/frescatto-logo.png') }}" alt="Frescatto"></div>
-      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/FAP-logo.png') }}"    alt="FAP"></div>
-      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/redentor-logo.png') }}" alt="Redentor"></div>
+      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/hospital.webp') }}"    alt="Hospital" width="120" height="44" loading="lazy"></div>
+      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/hospital2.webp') }}"   alt="Hospital Icaraí" width="120" height="44" loading="lazy"></div>
+      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/amoedo-logo.webp') }}" alt="Amoedo" width="120" height="44" loading="lazy"></div>
+      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/distac-logo.webp') }}" alt="Distac" width="120" height="44" loading="lazy"></div>
+      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/unimed-logo.webp') }}" alt="Unimed" width="120" height="44" loading="lazy"></div>
+      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/frescatto-logo.webp') }}" alt="Frescatto" width="120" height="44" loading="lazy"></div>
+      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/FAP-logo.webp') }}"    alt="FAP" width="120" height="44" loading="lazy"></div>
+      <div class="logo-strip-item"><img src="{{ asset('img/logo-cliente/redentor-logo.webp') }}" alt="Redentor" width="120" height="44" loading="lazy"></div>
     </div>
   </div>
 </section>

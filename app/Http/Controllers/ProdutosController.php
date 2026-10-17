@@ -65,9 +65,9 @@ class ProdutosController extends Controller
             $label    = $sizeLabels[$sizeKey] ?? $sizeKey . '"';
             $material = in_array($sizeKey, ['1','15']) ? 'Chapa 24' : 'Chapa 18';
             $abracImages = [
-                'img/fire out images/abracadeira-gota.png',
-                'img/fire out images/abracadeira-tamanhos.png',
-                'img/fire out images/abracadeira-inox.png',
+                'img/fire out images/abracadeira-gota.webp',
+                'img/fire out images/abracadeira-tamanhos.webp',
+                'img/fire out images/abracadeira-inox.webp',
             ];
             $abracVariants = [];
             foreach ($kits->values() as $i => $p) {
@@ -128,65 +128,65 @@ class ProdutosController extends Controller
             'mangueira-t1-15' => [
                 'name' => 'Mangueira Tipo 1 — 1½"', 'category' => 'Mangueiras',
                 'desc' => 'Para hidrantes internos residenciais. Revestimento externo 100% poliéster, tubo interno borracha sintética, conexões Storz em latão forjado. Dupla certificação INMETRO e UL.',
-                'image' => 'img/fire out images/Mangueira 1.1:2.jpg',
-                'variants' => [['db_sku'=>'mangueira-t1-15','label'=>null,'price'=>280.00,'image'=>'img/fire out images/Mangueira 1.1:2.jpg',
+                'image' => 'img/fire out images/Mangueira 1.1:2.webp',
+                'variants' => [['db_sku'=>'mangueira-t1-15','label'=>null,'price'=>280.00,'image'=>'img/fire out images/Mangueira 1.1:2.webp',
                     'specs'=>['Tipo: 1 — Edifícios Residenciais','Bitola: 1½" (38mm)','Comprimento: 15 metros','Pressão máx.: 980 kPa','Normas: NBR 14349 e NBR 11861','Certificação: INMETRO + UL'],
                     'wa'=>rawurlencode('Olá! Gostaria de um orçamento: Mangueira Tipo 1 1½".')]]],
             'mangueira-t2-15' => [
                 'name' => 'Mangueira Tipo 2 — 1½"', 'category' => 'Mangueiras',
                 'desc' => 'Para uso comercial, industrial e Corpo de Bombeiros. Maior resistência mecânica que o Tipo 1.',
-                'image' => 'img/fire out images/Mangueira 1.1:2.jpg',
-                'variants' => [['db_sku'=>'mangueira-t2-15','label'=>null,'price'=>340.00,'image'=>'img/fire out images/Mangueira 1.1:2.jpg',
+                'image' => 'img/fire out images/Mangueira 1.1:2.webp',
+                'variants' => [['db_sku'=>'mangueira-t2-15','label'=>null,'price'=>340.00,'image'=>'img/fire out images/Mangueira 1.1:2.webp',
                     'specs'=>['Tipo: 2 — Comercial, Industrial e Bombeiros','Bitola: 1½" (38mm)','Comprimento: 15 metros','Pressão máx.: 1370 kPa','Normas: NBR 14349 e NBR 11861','Certificação: INMETRO + UL'],
                     'wa'=>rawurlencode('Olá! Gostaria de um orçamento: Mangueira Tipo 2 1½".')]]],
             'mangueira-t2-25' => [
                 'name' => 'Mangueira Tipo 2 — 2½"', 'category' => 'Mangueiras',
                 'desc' => 'Para indústrias e áreas de alto risco. Maior vazão e resistência para combate profissional.',
-                'image' => 'img/fire out images/mangueira 2.1:2.jpg',
-                'variants' => [['db_sku'=>'mangueira-t2-25','label'=>null,'price'=>540.00,'image'=>'img/fire out images/mangueira 2.1:2.jpg',
+                'image' => 'img/fire out images/mangueira 2.1:2.webp',
+                'variants' => [['db_sku'=>'mangueira-t2-25','label'=>null,'price'=>540.00,'image'=>'img/fire out images/mangueira 2.1:2.webp',
                     'specs'=>['Tipo: 2 — Comercial, Industrial e Bombeiros','Bitola: 2½" (65mm)','Comprimento: 15 metros','Pressão máx.: 1370 kPa','Normas: NBR 14349 e NBR 11861','Certificação: INMETRO + UL'],
                     'wa'=>rawurlencode('Olá! Gostaria de um orçamento: Mangueira Tipo 2 2½".')]]],
             'esguicho' => [
                 'name' => 'Esguicho Regulável Storz', 'category' => 'Sistema de Hidrantes',
                 'desc' => 'Latão forjado de alta performance. Controle operacional em 3 posições: fechado, jato sólido e cortina de neblina.',
-                'image' => 'img/fire out images/esguicho.jpg',
+                'image' => 'img/fire out images/esguicho.webp',
                 'variants' => [
-                    ['db_sku'=>'esguicho-15','label'=>'1½"','price'=>140.00,'image'=>'img/fire out images/esguicho.jpg',
+                    ['db_sku'=>'esguicho-15','label'=>'1½"','price'=>140.00,'image'=>'img/fire out images/esguicho.webp',
                         'specs'=>['Conexão: 1½" Storz','Jato sólido e cortina de neblina','Material: Latão forjado'],
                         'wa'=>rawurlencode('Olá! Gostaria de um orçamento: Esguicho 1½".')],
-                    ['db_sku'=>'esguicho-25','label'=>'2½"','price'=>199.00,'image'=>'img/fire out images/esguicho.jpg',
+                    ['db_sku'=>'esguicho-25','label'=>'2½"','price'=>199.00,'image'=>'img/fire out images/esguicho.webp',
                         'specs'=>['Conexão: 2½" Storz','Maior vazão','Material: Latão forjado'],
                         'wa'=>rawurlencode('Olá! Gostaria de um orçamento: Esguicho 2½".')],
                 ]],
             'adaptador' => [
                 'name' => 'Adaptador Storz', 'category' => 'Sistema de Hidrantes',
                 'desc' => 'Engate rápido em latão de alta durabilidade. Acopla o registro globo do hidrante à mangueira de combate.',
-                'image' => 'img/fire out images/adaptador 2.1:2.jpg',
+                'image' => 'img/fire out images/adaptador 2.1:2.webp',
                 'variants' => [
-                    ['db_sku'=>'adaptador-2515','label'=>'2½" × 1½"','price'=>110.00,'image'=>'img/fire out images/adaptador 2.1:2.jpg',
+                    ['db_sku'=>'adaptador-2515','label'=>'2½" × 1½"','price'=>110.00,'image'=>'img/fire out images/adaptador 2.1:2.webp',
                         'specs'=>['Entrada: 2½" Rosca','Saída: 1½" Storz','Material: Latão'],
                         'wa'=>rawurlencode('Olá! Gostaria de um orçamento: Adaptador 2½" × 1½".')],
-                    ['db_sku'=>'adaptador-25','label'=>'2½"','price'=>180.00,'image'=>'img/fire out images/adaptador 2.1:2.jpg',
+                    ['db_sku'=>'adaptador-25','label'=>'2½"','price'=>180.00,'image'=>'img/fire out images/adaptador 2.1:2.webp',
                         'specs'=>['Conexão: 2½"','Material: Latão'],
                         'wa'=>rawurlencode('Olá! Gostaria de um orçamento: Adaptador 2½".')],
                 ]],
             'moldura' => [
                 'name' => 'Moldura para Caixa de Incêndio', 'category' => 'Acessórios',
                 'desc' => 'Caixa em chapa 18 galvanizada para abrigo de mangueiras. Acabamento vermelho padrão Rio com fecho porta-cadeado.',
-                'image' => 'img/fire out images/moldura-caixa-1.jpg',
+                'image' => 'img/fire out images/moldura-caixa-1.webp',
                 'variants' => [
-                    ['db_sku'=>'moldura-6040','label'=>'60×40 cm','price'=>200.00,'image'=>'img/fire out images/moldura-caixa-1.jpg',
+                    ['db_sku'=>'moldura-6040','label'=>'60×40 cm','price'=>200.00,'image'=>'img/fire out images/moldura-caixa-1.webp',
                         'specs'=>['60×40 cm','Chapa 18 galvanizada','Vermelho padrão Rio','Fecho porta-cadeado'],
                         'wa'=>rawurlencode('Olá! Gostaria de um orçamento: Moldura 60×40 cm.')],
-                    ['db_sku'=>'moldura-7050','label'=>'70×50 cm','price'=>250.00,'image'=>'img/fire out images/moldura-caixa-2.jpg',
+                    ['db_sku'=>'moldura-7050','label'=>'70×50 cm','price'=>250.00,'image'=>'img/fire out images/moldura-caixa-2.webp',
                         'specs'=>['70×50 cm','Chapa 18 galvanizada','Vermelho padrão Rio','Fecho porta-cadeado'],
                         'wa'=>rawurlencode('Olá! Gostaria de um orçamento: Moldura 70×50 cm.')],
                 ]],
             'antipanico' => [
                 'name' => 'Barra Antipânico', 'category' => 'Portas e Proteção',
                 'desc' => 'Garante o destravamento imediato da porta sob qualquer pressão exercida pelo lado de fuga. Obrigatória pela NBR 11785.',
-                'image' => 'img/fire out images/antipanico.jpg',
-                'variants' => [['db_sku'=>'antipanico','label'=>null,'price'=>null,'image'=>'img/fire out images/antipanico.jpg',
+                'image' => 'img/fire out images/antipanico.webp',
+                'variants' => [['db_sku'=>'antipanico','label'=>null,'price'=>null,'image'=>'img/fire out images/antipanico.webp',
                     'specs'=>['Norma: NBR 11785','Vertical ou horizontal','Hospitais, shoppings, indústrias','Simples pressão pelo lado de fuga'],
                     'wa'=>rawurlencode('Olá! Gostaria de um orçamento: Barra Antipânico.')]]],
             'portas-duplas' => [
@@ -206,15 +206,15 @@ class ProdutosController extends Controller
             'tripe' => [
                 'name' => 'Tripé Reforçado com Haste', 'category' => 'Suportes e Acessórios',
                 'desc' => 'Suporte de solo para extintores onde não há parede disponível. Indicado para extintores PQS.',
-                'image' => 'img/fire out images/tripe-extintor.png',
-                'variants' => [['db_sku'=>'tripe','label'=>null,'price'=>50.00,'image'=>'img/fire out images/tripe-extintor.png',
+                'image' => 'img/fire out images/tripe-extintor.webp',
+                'variants' => [['db_sku'=>'tripe','label'=>null,'price'=>50.00,'image'=>'img/fire out images/tripe-extintor.webp',
                     'specs'=>['Chapa 18','Base 19 cm','Para extintores PQS','Sem placa de sinalização'],
                     'wa'=>rawurlencode('Olá! Gostaria de um orçamento: Tripé Reforçado.')]]],
             'extintor-abc' => [
                 'name' => 'Extintor ABC — 6 kg', 'category' => 'Extintores',
                 'desc' => 'Classes A (sólidos), B (líquidos/gases) e C (elétrico). Suporte de parede incluso. Certificado INMETRO.',
-                'image' => 'img/fire out images/Extintor PQS.jpg',
-                'variants' => [['db_sku'=>'extintor-abc','label'=>null,'price'=>250.00,'image'=>'img/fire out images/Extintor PQS.jpg',
+                'image' => 'img/fire out images/Extintor PQS.webp',
+                'variants' => [['db_sku'=>'extintor-abc','label'=>null,'price'=>250.00,'image'=>'img/fire out images/Extintor PQS.webp',
                     'specs'=>['6 kg PQS ABC','Descarga ~15 seg.','NBR 15808 · INMETRO','Suporte de parede incluso'],
                     'wa'=>rawurlencode('Olá! Gostaria de um orçamento: Extintor ABC 6 kg.')]]],
         ];

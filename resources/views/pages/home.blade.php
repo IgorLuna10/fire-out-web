@@ -100,9 +100,9 @@
 }
 .sobre-accent {
   font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase;
-  color:rgba(255,255,255,.28); display:flex; align-items:center; gap:10px;
+  color:rgba(255,255,255,.75); display:flex; align-items:center; gap:10px;
 }
-.sobre-accent::before { content:''; width:24px; height:1px; background:rgba(255,255,255,.18); }
+.sobre-accent::before { content:''; width:24px; height:1px; background:rgba(255,255,255,.5); }
 
 /* ═══ CREDENCIAMENTOS — LOGOS ═══ */
 .cred-logo-row {
@@ -124,9 +124,9 @@
   max-width:1200px; margin:0 auto;
   display:grid; grid-template-columns:160px 1fr; gap:80px; align-items:center;
 }
-.produtos-logo img { width:140px; height:auto; display:block; }
+.produtos-logo img { width:140px; height:140px; aspect-ratio:1/1; object-fit:contain; display:block; }
 .produtos-desc {
-  font-size:16px; color:rgba(255,255,255,.52); line-height:1.85;
+  font-size:16px; color:rgba(255,255,255,.72); line-height:1.85;
   margin-bottom:24px; max-width:600px;
 }
 /* ═══ NOVA MISSÃO ═══ */
@@ -158,7 +158,7 @@
 .logo-item:nth-child(4n)      { border-right:none; }
 .logo-item:nth-last-child(-n+4) { border-bottom:none; }
 .logo-item img {
-  max-height:48px; max-width:120px; object-fit:contain;
+  max-height:48px; max-width:120px; width:auto; height:auto; object-fit:contain;
   filter:grayscale(1); opacity:.45;
   transition:filter .3s, opacity .3s;
 }
@@ -210,11 +210,11 @@
     </div>
   </div>
   <div class="hero-right">
-    <img src="{{ asset('img/fire out images/foraAcao.jpg') }}" alt="Fire Out equipe em ação">
+    <img src="{{ asset('img/fire out images/foraAcao.webp') }}" alt="Fire Out equipe em ação" width="1100" height="704" fetchpriority="high" loading="eager" decoding="async">
     <div class="hero-right-overlay"></div>
     <div class="hero-badge">
       <div style="display:flex;flex-direction:column;align-items:center;line-height:1;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:.75;margin-bottom:2px;">DESDE</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff;margin-bottom:2px;">DESDE</div>
         <div class="hero-badge-num">1996</div>
       </div>
     </div>
@@ -232,13 +232,13 @@
         <a href="{{ route('servicos') }}" class="btn-red" style="margin-top:8px;">Ver Nossos Serviços</a>
         <div class="cred-logo-row">
           <div class="cred-logo-item">
-            <img src="{{ asset('img/logo/CBMERJ.png') }}" alt="Corpo de Bombeiros Militar do Estado do Rio de Janeiro">
+            <img src="{{ asset('img/logo/CBMERJ.webp') }}" alt="Corpo de Bombeiros Militar do Estado do Rio de Janeiro" width="66" height="66">
           </div>
           <div class="cred-logo-item">
-            <img src="{{ asset('img/logo/CREA.png') }}" alt="CREA-RJ — Conselho Regional de Engenharia e Agronomia">
+            <img src="{{ asset('img/logo/CREA.webp') }}" alt="CREA-RJ — Conselho Regional de Engenharia e Agronomia" width="66" height="40">
           </div>
           <div class="cred-logo-item">
-            <img src="{{ asset('img/logo/ABNT.png') }}?v=2" alt="ABNT — Associação Brasileira de Normas Técnicas">
+            <img src="{{ asset('img/logo/ABNT.webp') }}?v=2" alt="ABNT — Associação Brasileira de Normas Técnicas" width="62" height="66">
           </div>
         </div>
       </div>
@@ -264,10 +264,10 @@
 <section class="section-produtos">
   <div class="produtos-inner">
     <div class="produtos-logo">
-      <img src="{{ asset('img/logo/light-logo.png') }}" alt="Fire Out">
+      <img src="{{ asset('img/logo/light-logo.webp') }}" alt="Fire Out" width="140" height="140">
     </div>
     <div class="produtos-content">
-      <div class="s-label" style="color:rgba(255,255,255,.35);">Nossos Produtos</div>
+      <div class="s-label" style="color:var(--red-l);">Nossos Produtos</div>
       <h2 class="s-title s-title--white">LINHA COMPLETA DE<br>EQUIPAMENTOS<br><em style="color:var(--red-l);font-style:normal;">CERTIFICADOS</em></h2>
       <p class="produtos-desc">Produzimos e fornecemos porta corta-fogo, abraçadeiras, molduras, canoplas, mangueiras e acessórios certificados para sistemas de combate a incêndio.</p>
       <a href="{{ route('produtos') }}" class="btn-red" style="margin-top:8px;">Ver Nossos Produtos</a>
@@ -284,7 +284,7 @@
     </div>
     <div class="logo-grid">
       @foreach($clientes as $cliente)
-      <div class="logo-item"><img src="{{ asset('img/logo-cliente/' . $cliente['logo']) }}" alt="{{ $cliente['nome'] }}"></div>
+      <div class="logo-item"><img src="{{ asset('img/logo-cliente/' . $cliente['logo']) }}" alt="{{ $cliente['nome'] }}" width="120" height="44" loading="lazy"></div>
       @endforeach
     </div>
   </div>
@@ -306,7 +306,7 @@
       <h2>PRONTO PARA PROTEGER<br>SUA EDIFICAÇÃO?</h2>
       <p>Nossos especialistas entram em contato com uma proposta personalizada.</p>
     </div>
-    <a href="https://wa.me/5521966969836" class="btn-white" target="_blank">WhatsApp: (21) 96696-9836</a>
+    <a href="https://wa.me/5521966969836" class="btn-white" target="_blank" onclick="return gtag_report_conversion('https://wa.me/5521966969836');">WhatsApp: (21) 96696-9836</a>
   </div>
 </div>
 @endsection

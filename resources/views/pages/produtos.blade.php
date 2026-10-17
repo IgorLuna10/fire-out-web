@@ -560,9 +560,9 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
     <div class="prod-grid">
 
       @foreach([
-        ['mangueira-t1-15','Mangueira Tipo 1 — 1½"','Para hidrantes internos residenciais.',['15m · Ø 1½" (38mm)','Pressão máx. 980 kPa','NBR 14349 + 11861','INMETRO + UL'],'img/fire out images/Mangueira 1.1:2.jpg','Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Mangueira%20Tipo%201%201.1%2F2%22.'],
-        ['mangueira-t2-15','Mangueira Tipo 2 — 1½"','Uso comercial, industrial e Corpo de Bombeiros.',['15m · Ø 1½" (38mm)','Pressão máx. 1370 kPa','NBR 14349 + 11861','INMETRO + UL'],'img/fire out images/Mangueira 1.1:2.jpg','Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Mangueira%20Tipo%202%201.1%2F2%22.'],
-        ['mangueira-t2-25','Mangueira Tipo 2 — 2½"','Para indústrias e áreas de alto risco.',['15m · Ø 2½" (65mm)','Pressão máx. 1370 kPa','NBR 14349 + 11861','INMETRO + UL'],'img/fire out images/mangueira 2.1:2.jpg','Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Mangueira%20Tipo%202%202.1%2F2%22.'],
+        ['mangueira-t1-15','Mangueira Tipo 1 — 1½"','Para hidrantes internos residenciais.',['15m · Ø 1½" (38mm)','Pressão máx. 980 kPa','NBR 14349 + 11861','INMETRO + UL'],'img/fire out images/Mangueira 1.1:2.webp','Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Mangueira%20Tipo%201%201.1%2F2%22.'],
+        ['mangueira-t2-15','Mangueira Tipo 2 — 1½"','Uso comercial, industrial e Corpo de Bombeiros.',['15m · Ø 1½" (38mm)','Pressão máx. 1370 kPa','NBR 14349 + 11861','INMETRO + UL'],'img/fire out images/Mangueira 1.1:2.webp','Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Mangueira%20Tipo%202%201.1%2F2%22.'],
+        ['mangueira-t2-25','Mangueira Tipo 2 — 2½"','Para indústrias e áreas de alto risco.',['15m · Ø 2½" (65mm)','Pressão máx. 1370 kPa','NBR 14349 + 11861','INMETRO + UL'],'img/fire out images/mangueira 2.1:2.webp','Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Mangueira%20Tipo%202%202.1%2F2%22.'],
       ] as [$id,$name,$desc,$specs,$img,$wa])
       <article class="prod-card" data-cat="mangueiras" data-prod="{{ $id }}" data-href="{{ route('produto.show', $id) }}" data-cv="0">
         <div class="pcard-img">
@@ -589,7 +589,7 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
       <article class="prod-card" data-cat="mangueiras" data-prod="esguicho" data-href="{{ route('produto.show', 'esguicho') }}" data-cv="0">
         <div class="pcard-img">
           <span class="pcard-cat">Hidrantes</span>
-          <img src="{{ asset('img/fire out images/esguicho.jpg') }}" alt="Esguicho Regulável" id="img-esguicho">
+          <img src="{{ asset('img/fire out images/esguicho.webp') }}" alt="Esguicho Regulável" id="img-esguicho">
         </div>
         <div class="pcard-body">
           <h3 class="pcard-name">Esguicho Regulável Storz</h3>
@@ -618,7 +618,7 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
       <article class="prod-card" data-cat="mangueiras" data-prod="adaptador" data-href="{{ route('produto.show', 'adaptador') }}" data-cv="0">
         <div class="pcard-img">
           <span class="pcard-cat">Hidrantes</span>
-          <img src="{{ asset('img/fire out images/adaptador 2.1:2.jpg') }}" alt="Adaptador Storz" id="img-adaptador">
+          <img src="{{ asset('img/fire out images/adaptador 2.1:2.webp') }}" alt="Adaptador Storz" id="img-adaptador">
         </div>
         <div class="pcard-body">
           <h3 class="pcard-name">Adaptador Storz</h3>
@@ -647,7 +647,7 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
       <article class="prod-card" data-cat="mangueiras" data-prod="moldura" data-href="{{ route('produto.show', 'moldura') }}" data-cv="0">
         <div class="pcard-img">
           <span class="pcard-cat">Acessórios</span>
-          <img src="{{ asset('img/fire out images/moldura-caixa-1.jpg') }}" alt="Moldura para Caixa de Incêndio" id="img-moldura">
+          <img src="{{ asset('img/fire out images/moldura-caixa-1.webp') }}" alt="Moldura para Caixa de Incêndio" id="img-moldura">
         </div>
         <div class="pcard-body">
           <h3 class="pcard-name">Moldura para Caixa de Incêndio</h3>
@@ -688,7 +688,7 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
       <article class="prod-card" data-cat="extintores" data-prod="extintor-abc" data-href="{{ route('produto.show', 'extintor-abc') }}" data-cv="0">
         <div class="pcard-img">
           <span class="pcard-cat">Extintores</span>
-          <img src="{{ asset('img/fire out images/Extintor PQS.jpg') }}" alt="Extintor ABC 6kg">
+          <img src="{{ asset('img/fire out images/Extintor PQS.webp') }}" alt="Extintor ABC 6kg">
         </div>
         <div class="pcard-body">
           <h3 class="pcard-name">Extintor ABC — 6 kg</h3>
@@ -711,7 +711,7 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
       <article class="prod-card" data-cat="extintores" data-prod="tripe" data-href="{{ route('produto.show', 'tripe') }}" data-cv="0">
         <div class="pcard-img">
           <span class="pcard-cat">Suportes</span>
-          <img src="{{ asset('img/fire out images/tripe-extintor.png') }}" alt="Tripé Reforçado com Haste">
+          <img src="{{ asset('img/fire out images/tripe-extintor.webp') }}" alt="Tripé Reforçado com Haste">
         </div>
         <div class="pcard-body">
           <h3 class="pcard-name">Tripé Reforçado com Haste</h3>
@@ -767,7 +767,7 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
       </article>
 
       @foreach([
-        ['antipanico','Barra Antipânico','Destravamento imediato pelo lado de fuga. NBR 11785.',['Vertical ou horizontal','Hospitais · Shoppings · Cinemas'],'img/fire out images/antipanico.jpg','Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Barra%20Antip%C3%A2nico.'],
+        ['antipanico','Barra Antipânico','Destravamento imediato pelo lado de fuga. NBR 11785.',['Vertical ou horizontal','Hospitais · Shoppings · Cinemas'],'img/fire out images/antipanico.webp','Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Barra%20Antip%C3%A2nico.'],
         ['portas-duplas','Portas Duplas / Fora de Padrão','Medidas especiais. Fabricação própria Fire Out sob medida.',['ABNT NBR 11742','Prazo 5 dias úteis'],'img/fire out images/14 porta-corta-fogo-p90-abnt-11742.webp','Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Portas%20Duplas.'],
       ] as [$id,$name,$desc,$specs,$img,$wa])
       <article class="prod-card" data-cat="protecao" data-prod="{{ $id }}" data-href="{{ route('produto.show', $id) }}" data-cv="0">
@@ -834,7 +834,7 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
           $isConsulta = !$firstKit || $firstKit['price'] === null;
         @endphp
         @php
-          $abracCardImgs = ['abracadeira-gota.png','abracadeira-tamanhos.png','abracadeira-inox.png'];
+          $abracCardImgs = ['abracadeira-gota.webp','abracadeira-tamanhos.webp','abracadeira-inox.webp'];
           $abracCardImg  = $abracCardImgs[$loop->index % 3];
         @endphp
         <article class="prod-card" data-cat="abracadeiras" data-prod="{{ $prodId }}" data-href="{{ route('produto.show', $prodId) }}" data-cv="0">
@@ -881,7 +881,7 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
       <p>Nossa equipe localiza qualquer equipamento certificado. Fale conosco.</p>
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="https://wa.me/5521966969836" class="btn-white" target="_blank">WhatsApp: (21) 96696-9836</a>
+      <a href="https://wa.me/5521966969836" class="btn-white" target="_blank" onclick="return gtag_report_conversion(this.href);">WhatsApp: (21) 96696-9836</a>
       <a href="{{ route('contato') }}" class="btn-ghost" style="border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.85);">Enviar E-mail</a>
     </div>
   </div>
@@ -939,24 +939,24 @@ function setView(v) {
 /* ── CATALOGUE ── */
 const catalogue = {
   /* ── MANGUEIRAS ── */
-  'mangueira-t1-15': { price:280.00,  badge:'Mangueiras', name:'Mangueira Tipo 1 — 1½"', desc:'Para hidrantes internos residenciais. Revestimento externo 100% poliéster, tubo interno borracha sintética, conexões Storz em latão forjado. Dupla certificação INMETRO e UL.', variants:[{ label:null, img:'{{ asset("img/fire out images/Mangueira 1.1:2.jpg") }}', specs:['Tipo: 1 — Edifícios Residenciais','Bitola: 1½" (38mm)','Comprimento: 15 metros','Pressão máx.: 980 kPa (10 kgf/cm²)','Normas: NBR 14349 e NBR 11861','Certificação: INMETRO + UL','Material externo: 100% poliéster','Tubo interno: borracha sintética','Conexões: Storz latão forjado'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Mangueira%20Tipo%201%201.1%2F2%22.' }] },
-  'mangueira-t2-15': { price:340.00,  badge:'Mangueiras', name:'Mangueira Tipo 2 — 1½"', desc:'Para uso comercial, industrial e Corpo de Bombeiros. Maior resistência mecânica que o Tipo 1. Revestimento externo 100% poliéster, tubo interno borracha sintética, conexões Storz em latão forjado.', variants:[{ label:null, img:'{{ asset("img/fire out images/Mangueira 1.1:2.jpg") }}', specs:['Tipo: 2 — Comercial, Industrial e Bombeiros','Bitola: 1½" (38mm)','Comprimento: 15 metros','Pressão máx.: 1370 kPa (14 kgf/cm²)','Normas: NBR 14349 e NBR 11861','Certificação: INMETRO + UL','Material externo: 100% poliéster','Tubo interno: borracha sintética','Conexões: Storz latão forjado'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Mangueira%20Tipo%202%201.1%2F2%22.' }] },
-  'mangueira-t2-25': { price:540.00,  badge:'Mangueiras', name:'Mangueira Tipo 2 — 2½"', desc:'Para indústrias e áreas de alto risco. Revestimento externo 100% poliéster, tubo interno borracha sintética, conexões Storz em latão forjado. Dupla certificação INMETRO e UL.', variants:[{ label:null, img:'{{ asset("img/fire out images/mangueira 2.1:2.jpg") }}', specs:['Tipo: 2 — Comercial, Industrial e Bombeiros','Bitola: 2½" (65mm)','Comprimento: 15 metros','Pressão máx.: 1370 kPa (14 kgf/cm²)','Normas: NBR 14349 e NBR 11861','Certificação: INMETRO + UL','Material externo: 100% poliéster','Tubo interno: borracha sintética','Conexões: Storz latão forjado'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Mangueira%20Tipo%202%202.1%2F2%22.' }] },
+  'mangueira-t1-15': { price:280.00,  badge:'Mangueiras', name:'Mangueira Tipo 1 — 1½"', desc:'Para hidrantes internos residenciais. Revestimento externo 100% poliéster, tubo interno borracha sintética, conexões Storz em latão forjado. Dupla certificação INMETRO e UL.', variants:[{ label:null, img:'{{ asset("img/fire out images/Mangueira 1.1:2.webp") }}', specs:['Tipo: 1 — Edifícios Residenciais','Bitola: 1½" (38mm)','Comprimento: 15 metros','Pressão máx.: 980 kPa (10 kgf/cm²)','Normas: NBR 14349 e NBR 11861','Certificação: INMETRO + UL','Material externo: 100% poliéster','Tubo interno: borracha sintética','Conexões: Storz latão forjado'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Mangueira%20Tipo%201%201.1%2F2%22.' }] },
+  'mangueira-t2-15': { price:340.00,  badge:'Mangueiras', name:'Mangueira Tipo 2 — 1½"', desc:'Para uso comercial, industrial e Corpo de Bombeiros. Maior resistência mecânica que o Tipo 1. Revestimento externo 100% poliéster, tubo interno borracha sintética, conexões Storz em latão forjado.', variants:[{ label:null, img:'{{ asset("img/fire out images/Mangueira 1.1:2.webp") }}', specs:['Tipo: 2 — Comercial, Industrial e Bombeiros','Bitola: 1½" (38mm)','Comprimento: 15 metros','Pressão máx.: 1370 kPa (14 kgf/cm²)','Normas: NBR 14349 e NBR 11861','Certificação: INMETRO + UL','Material externo: 100% poliéster','Tubo interno: borracha sintética','Conexões: Storz latão forjado'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Mangueira%20Tipo%202%201.1%2F2%22.' }] },
+  'mangueira-t2-25': { price:540.00,  badge:'Mangueiras', name:'Mangueira Tipo 2 — 2½"', desc:'Para indústrias e áreas de alto risco. Revestimento externo 100% poliéster, tubo interno borracha sintética, conexões Storz em latão forjado. Dupla certificação INMETRO e UL.', variants:[{ label:null, img:'{{ asset("img/fire out images/mangueira 2.1:2.webp") }}', specs:['Tipo: 2 — Comercial, Industrial e Bombeiros','Bitola: 2½" (65mm)','Comprimento: 15 metros','Pressão máx.: 1370 kPa (14 kgf/cm²)','Normas: NBR 14349 e NBR 11861','Certificação: INMETRO + UL','Material externo: 100% poliéster','Tubo interno: borracha sintética','Conexões: Storz latão forjado'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Mangueira%20Tipo%202%202.1%2F2%22.' }] },
   'esguicho': { price:140.00, badge:'Sistema de Hidrantes', name:'Esguicho Regulável Storz', desc:'Alta performance em latão forjado. Controle operacional em 3 posições estratégicas de combate.', variants:[
-    { label:'1½"', price:140.00, img:'{{ asset("img/fire out images/esguicho.jpg") }}', specs:['Conexão: 1½" Storz','Posição 1: Totalmente fechado','Posição 2: Jato sólido concentrado','Posição 3: Cortina de neblina','Material: Latão forjado'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Esguicho%201.1%2F2%22.' },
-    { label:'2½"', price:199.00, img:'{{ asset("img/fire out images/esguicho.jpg") }}', specs:['Conexão: 2½" Storz','Posição 1: Totalmente fechado','Posição 2: Jato sólido concentrado','Posição 3: Cortina de neblina','Material: Latão forjado','Aplicação: Maior vazão'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Esguicho%202.1%2F2%22.' }
+    { label:'1½"', price:140.00, img:'{{ asset("img/fire out images/esguicho.webp") }}', specs:['Conexão: 1½" Storz','Posição 1: Totalmente fechado','Posição 2: Jato sólido concentrado','Posição 3: Cortina de neblina','Material: Latão forjado'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Esguicho%201.1%2F2%22.' },
+    { label:'2½"', price:199.00, img:'{{ asset("img/fire out images/esguicho.webp") }}', specs:['Conexão: 2½" Storz','Posição 1: Totalmente fechado','Posição 2: Jato sólido concentrado','Posição 3: Cortina de neblina','Material: Latão forjado','Aplicação: Maior vazão'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Esguicho%202.1%2F2%22.' }
   ] },
   'adaptador': { price:110.00, badge:'Sistema de Hidrantes', name:'Adaptador Storz', desc:'Engate rápido em latão de alta durabilidade. Acopla o registro globo do hidrante à mangueira de combate.', variants:[
-    { label:'2½" × 1½"', price:110.00, img:'{{ asset("img/fire out images/adaptador 2.1:2.jpg") }}', specs:['Entrada: 2½" Rosca (registro globo)','Saída: 1½" Storz (mangueira)','Material: Latão de alta durabilidade'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Adaptador%202.1%2F2%22%20x%201.1%2F2%22.' },
-    { label:'2½"',       price:180.00, img:'{{ asset("img/fire out images/adaptador 2.1:2.jpg") }}', specs:['Conexão: 2½"','Material: Latão de alta durabilidade'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Adaptador%202.1%2F2%22.' }
+    { label:'2½" × 1½"', price:110.00, img:'{{ asset("img/fire out images/adaptador 2.1:2.webp") }}', specs:['Entrada: 2½" Rosca (registro globo)','Saída: 1½" Storz (mangueira)','Material: Latão de alta durabilidade'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Adaptador%202.1%2F2%22%20x%201.1%2F2%22.' },
+    { label:'2½"',       price:180.00, img:'{{ asset("img/fire out images/adaptador 2.1:2.webp") }}', specs:['Conexão: 2½"','Material: Latão de alta durabilidade'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Adaptador%202.1%2F2%22.' }
   ] },
   /* ── PORTAS E MOLDURAS ── */
   'porta-cf':        { price:null,    badge:'Proteção Estrutural', name:'Porta Corta-Fogo P-90', desc:'Porta P-90 com 90 minutos de resistência ao fogo, certificada ABNT NBR 11742. Fabricação própria Fire Out com instalação inclusa.', variants:[{ label:null, img:'{{ asset("img/fire out images/14 porta-corta-fogo-p90-abnt-11742.webp") }}', specs:['Classificação: P-90','Resistência: 90 minutos','Norma: ABNT NBR 11742','Fabricação própria Fire Out','Núcleo isolante térmico certificado','Instalação inclusa'], wa:'Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20Porta%20Corta-Fogo%20P-90.' }] },
   'moldura': { price:200.00, badge:'Portas e Molduras', name:'Moldura para Caixa de Incêndio', desc:'Caixa em chapa 18 galvanizada para proteção e abrigo de mangueiras de incêndio. Acabamento vermelho padrão Rio com fecho porta-cadeado instalado.', variants:[
-    { label:'60×40 cm', price:200.00, img:'{{ asset("img/fire out images/moldura-caixa-1.jpg") }}', specs:['Dimensões: 60×40 cm','Material: Chapa 18 galvanizada','Acabamento: Vermelho padrão Rio','Fecho porta-cadeado incluso'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Moldura%20Caixa%2060x40.' },
-    { label:'70×50 cm', price:250.00, img:'{{ asset("img/fire out images/moldura-caixa-2.jpg") }}', specs:['Dimensões: 70×50 cm','Material: Chapa 18 galvanizada','Acabamento: Vermelho padrão Rio','Fecho porta-cadeado incluso'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Moldura%20Caixa%2070x50.' }
+    { label:'60×40 cm', price:200.00, img:'{{ asset("img/fire out images/moldura-caixa-1.webp") }}', specs:['Dimensões: 60×40 cm','Material: Chapa 18 galvanizada','Acabamento: Vermelho padrão Rio','Fecho porta-cadeado incluso'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Moldura%20Caixa%2060x40.' },
+    { label:'70×50 cm', price:250.00, img:'{{ asset("img/fire out images/moldura-caixa-2.webp") }}', specs:['Dimensões: 70×50 cm','Material: Chapa 18 galvanizada','Acabamento: Vermelho padrão Rio','Fecho porta-cadeado incluso'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Moldura%20Caixa%2070x50.' }
   ] },
-  'antipanico':      { price:null,    badge:'Proteção Estrutural', name:'Barra Antipânico', desc:'Garante o destravamento imediato da porta sob qualquer pressão exercida na barra pelo lado de fuga. A norma proíbe qualquer mecanismo de trancamento no lado oposto que impeça essa abertura.', variants:[{ label:null, img:'{{ asset("img/fire out images/antipanico.jpg") }}', specs:['Norma: NBR 11785','Tipos: Alavanca com travamento vertical ou horizontal','Obrigatória em: hospitais, indústrias, cinemas, shoppings, igrejas e discotecas','Acionamento: simples pressão pelo lado de fuga'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Barra%20Antip%C3%A2nico.' }] },
+  'antipanico':      { price:null,    badge:'Proteção Estrutural', name:'Barra Antipânico', desc:'Garante o destravamento imediato da porta sob qualquer pressão exercida na barra pelo lado de fuga. A norma proíbe qualquer mecanismo de trancamento no lado oposto que impeça essa abertura.', variants:[{ label:null, img:'{{ asset("img/fire out images/antipanico.webp") }}', specs:['Norma: NBR 11785','Tipos: Alavanca com travamento vertical ou horizontal','Obrigatória em: hospitais, indústrias, cinemas, shoppings, igrejas e discotecas','Acionamento: simples pressão pelo lado de fuga'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Barra%20Antip%C3%A2nico.' }] },
   'portas-duplas':   { price:null,    badge:'Portas e Molduras', name:'Portas Duplas / Fora de Padrão', desc:'Portas corta-fogo duplas e medidas especiais. Fabricação própria Fire Out sob medida conforme a necessidade da edificação. Prazo de fabricação: 5 dias úteis.', variants:[{ label:null, img:'{{ asset("img/fire out images/14 porta-corta-fogo-p90-abnt-11742.webp") }}', specs:['Medidas especiais sob pedido','Portas duplas disponíveis','Fabricação própria Fire Out','Prazo: 5 dias úteis','Consulte nossa equipe técnica'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Portas%20Duplas.' }] },
   /* ── ABRAÇADEIRAS — prices from DB ── */
   @foreach($abracadeiras as $size)
@@ -966,7 +966,7 @@ const catalogue = {
     $variants   = array_map(fn($kit) => [
         'label' => 'Kit ' . $kit['qty'] . ' un.',
         'price' => $kit['price'],
-        'img'   => asset('img/fire out images/abracadeira-gota.png'),
+        'img'   => asset('img/fire out images/abracadeira-gota.webp'),
         'specs' => [
             'Bitola: ' . $size['size_label'],
             'Quantidade: ' . $kit['qty'] . ' unidades',
@@ -986,9 +986,9 @@ const catalogue = {
   @endforeach
   /* ── SUPORTES ── */
   'canopla':     { price:4.00,   badge:'Suportes e Acessórios', name:'Canopla em Aço Inox ½"', desc:'Acabamento estético e funcional para instalação de sprinklers em forros de gesso. Produzida em aço inoxidável — máxima resistência à corrosão, ideal para áreas litorâneas expostas à maresia. Não deforma como peças de alumínio.', variants:[{ label:null, img:'{{ asset("img/fire out images/20 canopla acabamento-para-sprinklers-12-200-unidades.webp") }}', specs:['Material: Aço Inox','Diâmetro: 63 mm','Compatível com: ½" SPK (sprinklers)','Resistência à corrosão: máxima (maresia)','Vantagem: não deforma sob calor como alumínio'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Canopla%20Inox.' }] },
-  'tripe':       { price:50.00,  badge:'Suportes e Acessórios', name:'Tripé Reforçado com Haste', desc:'Suporte de solo para extintores em locais onde não é possível fixar diretamente na parede. Altamente indicado para extintores PQS (pó químico seco). Não acompanha placa de sinalização.', variants:[{ label:null, img:'{{ asset("img/fire out images/tripe-extintor.png") }}', specs:['Material: Chapa 18','Base: 19 cm de diâmetro','Indicado para: extintores PQS','Aplicação: onde não há parede disponível para fixação','Obs.: não acompanha placa de sinalização'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Trip%C3%A9%20Refor%C3%A7ado.' }] },
+  'tripe':       { price:50.00,  badge:'Suportes e Acessórios', name:'Tripé Reforçado com Haste', desc:'Suporte de solo para extintores em locais onde não é possível fixar diretamente na parede. Altamente indicado para extintores PQS (pó químico seco). Não acompanha placa de sinalização.', variants:[{ label:null, img:'{{ asset("img/fire out images/tripe-extintor.webp") }}', specs:['Material: Chapa 18','Base: 19 cm de diâmetro','Indicado para: extintores PQS','Aplicação: onde não há parede disponível para fixação','Obs.: não acompanha placa de sinalização'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Trip%C3%A9%20Refor%C3%A7ado.' }] },
   /* ── EXTINTORES ── */
-  'extintor-abc': { price:250.00, badge:'Extintores de Incêndio', name:'Extintor ABC — 6 kg', desc:'Recomendado para extinguir princípios de incêndio em três frentes: sólidos combustíveis (A), líquidos e gases inflamáveis (B) e sistemas elétricos energizados (C). Acompanha suporte de parede metálico.', variants:[{ label:null, img:'{{ asset("img/fire out images/Extintor PQS.jpg") }}', specs:['Agente extintor: Pó Químico Seco ABC','Carga: 6 kg','Classe A: sólidos (madeira, papel, plásticos)','Classe B: líquidos/gases (álcool, gasolina, óleo)','Classe C: sistemas elétricos energizados','Tempo de descarga: ~15 segundos','Pressurização: direta','Suporte de parede metálico incluso','Norma: NBR 15808','Certificação: INMETRO'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Extintor%20ABC%206kg.' }] }
+  'extintor-abc': { price:250.00, badge:'Extintores de Incêndio', name:'Extintor ABC — 6 kg', desc:'Recomendado para extinguir princípios de incêndio em três frentes: sólidos combustíveis (A), líquidos e gases inflamáveis (B) e sistemas elétricos energizados (C). Acompanha suporte de parede metálico.', variants:[{ label:null, img:'{{ asset("img/fire out images/Extintor PQS.webp") }}', specs:['Agente extintor: Pó Químico Seco ABC','Carga: 6 kg','Classe A: sólidos (madeira, papel, plásticos)','Classe B: líquidos/gases (álcool, gasolina, óleo)','Classe C: systems elétricos energizados','Tempo de descarga: ~15 segundos','Pressurização: direta','Suporte de parede metálico incluso','Norma: NBR 15808','Certificação: INMETRO'], wa:'Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Extintor%20ABC%206kg.' }] }
 };
 
 /* ── DB PRICE OVERRIDES (admin-managed) ──
@@ -1235,6 +1235,9 @@ function cartSendWA() {
   else if (runningTotal > 0)           lines += 'Total: ' + fmtBRL(runningTotal) + '\n';
   else                                  lines += 'Todos os itens são Sob Consulta.\n';
   lines += '\nAguardo retorno. Obrigado!';
+  if (typeof gtag === 'function') {
+    gtag('event', 'conversion', { 'send_to': 'AW-18224608696/GgOaC0ui1u0cELjrlfJD' });
+  }
   window.open('https://wa.me/5521966969836?text=' + encodeURIComponent(lines), '_blank');
 }
 

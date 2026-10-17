@@ -1,10 +1,10 @@
 <style>
-.nav-logo-img { height:82px; width:auto; max-width:300px; display:block; }
+.nav-logo-img { height:94px; width:auto; max-width:300px; aspect-ratio:1/1; display:block; object-fit:contain; }
 </style>
 
 <nav class="fo-nav">
   <a href="{{ route('home') }}" class="nav-logo" style="flex-shrink:0;">
-    <img src="{{ asset('img/logo/light-logo.png') }}" alt="Fire Out" class="nav-logo-img">
+    <img src="{{ asset('img/logo/light-logo.webp') }}" alt="Fire Out" class="nav-logo-img" width="94" height="94">
   </a>
   <div class="nav-links">
     <a href="{{ route('home') }}"          class="{{ request()->routeIs('home')          ? 'active' : '' }}">Fire Out</a>

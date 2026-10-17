@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Fire Out — Porta Corta-Fogo P-90 Certificada ABNT NBR 11742')
-@section('description', 'Fabricamos e instalamos portas corta-fogo P-90 certificadas ABNT NBR 11742. Conjunto completo com contra-marco, dobradiças e fechadura. Aprovação CBMERJ inclusa.')
+@section('title', 'Fire Out — Porta Corta-Fogo P-90 Certificada ABNT')
+@section('description', 'Fabricamos e instalamos portas corta-fogo P-90 certificadas ABNT. Conjunto completo com contra-marco, dobradiças e fechadura. Aprovação CBMERJ inclusa.')
 
 @push('styles')
 <style>
@@ -89,8 +89,14 @@
   font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
   padding:6px 12px; border-radius:20px;
 }
+.pcf-gallery-caption {
+  font-size:13px; font-weight:600; color:var(--ink);
+  text-align:center; padding:8px 12px; background:#fff;
+  border:1px solid rgba(0,0,0,.07); border-radius:var(--r-md);
+  margin-top:2px; transition:all .2s;
+}
 .pcf-thumbs {
-  display:grid; grid-template-columns:repeat(4,1fr); gap:8px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
 }
 .pcf-thumb {
   background:#fff; border:1.5px solid rgba(0,0,0,.07); border-radius:var(--r-md);
@@ -99,12 +105,35 @@
 }
 .pcf-thumb:hover,
 .pcf-thumb.is-active { border-color:var(--red); }
-.pcf-thumb img { width:100%; height:100%; object-fit:contain; padding:8px; }
+.pcf-thumb img { width:100%; height:100%; object-fit:cover; }
 .pcf-thumb-empty {
   background:rgba(0,0,0,.03);
   display:flex; align-items:center; justify-content:center;
 }
 .pcf-thumb-empty svg { width:18px; height:18px; stroke:rgba(0,0,0,.18); fill:none; stroke-width:1.5; }
+
+/* ── GALERIA DE FÁBRICA & PRODUÇÃO ── */
+.pcf-factory { padding:80px 0; background:var(--off); border-top:1px solid rgba(0,0,0,.06); }
+.pcf-factory-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px;
+}
+.pcf-factory-card {
+  background:#fff; border-radius:var(--r-lg); overflow:hidden;
+  border:1px solid rgba(0,0,0,.08); display:flex; flex-direction:column;
+  transition:transform .2s, box-shadow .2s;
+}
+.pcf-factory-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,0,0,.09); }
+.pcf-factory-img-wrap {
+  aspect-ratio:3/4; overflow:hidden; background:#eee; position:relative; cursor:pointer;
+}
+.pcf-factory-img-wrap img {
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .3s;
+}
+.pcf-factory-card:hover .pcf-factory-img-wrap img { transform:scale(1.04); }
+.pcf-factory-body { padding:18px 20px; }
+.pcf-factory-title { font-size:14px; font-weight:700; color:var(--ink); margin-bottom:4px; }
+.pcf-factory-desc { font-size:12.5px; color:var(--warm); line-height:1.5; }
 
 /* — Details panel — */
 .pcf-details { display:flex; flex-direction:column; gap:0; }
@@ -264,6 +293,7 @@
   .pcf-cert-inner { grid-template-columns:1fr; gap:40px; }
   .pcf-cert-seal { width:120px; height:120px; }
   .process-grid { grid-template-columns:1fr 1fr; }
+  .pcf-factory-grid { grid-template-columns:repeat(2,1fr); }
 }
 @media(max-width:640px) {
   .pcf-feat-grid { grid-template-columns:1fr 1fr; gap:12px; }
@@ -273,7 +303,10 @@
   .pcf-accord-btn { padding:16px 20px; }
   .pcf-accord-body { padding:4px 20px 20px; }
   .process-grid { grid-template-columns:1fr 1fr; }
-  .pcf-thumbs { grid-template-columns:repeat(4,1fr); }
+  .pcf-thumbs { grid-template-columns:repeat(6,1fr); }
+}
+@media(max-width:480px) {
+  .pcf-factory-grid { grid-template-columns:1fr; }
 }
 @media(max-width:400px) {
   .process-grid { grid-template-columns:1fr; }
@@ -292,7 +325,7 @@
     <div class="pcf-hero-badges">
       <span class="pcf-hero-badge">
         <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        ABNT NBR 11742
+        Certificada ABNT
       </span>
       <span class="pcf-hero-badge">
         <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -311,23 +344,22 @@
       <div class="pcf-gallery">
         <div class="pcf-gallery-main">
           <div class="pcf-gallery-badge">P-90</div>
-          <span class="pcf-gallery-cert">ABNT NBR 11742</span>
+          <span class="pcf-gallery-cert">Certificada ABNT</span>
           <img id="pcf-main-img"
                src="{{ asset('img/fire out images/14 porta-corta-fogo-p90-abnt-11742.webp') }}"
-               alt="Porta Corta-Fogo P-90">
+               alt="Porta Corta-Fogo P-90"
+               width="400" height="500">
         </div>
+        <div id="pcf-main-caption" class="pcf-gallery-caption">Porta Corta-Fogo P-90 Certificada ABNT</div>
         <div class="pcf-thumbs">
-          <div class="pcf-thumb is-active" data-src="{{ asset('img/fire out images/14 porta-corta-fogo-p90-abnt-11742.webp') }}">
-            <img src="{{ asset('img/fire out images/14 porta-corta-fogo-p90-abnt-11742.webp') }}" alt="">
+          <div class="pcf-thumb is-active" data-src="{{ asset('img/fire out images/14 porta-corta-fogo-p90-abnt-11742.webp') }}" data-title="Porta Corta-Fogo P-90 Certificada ABNT">
+            <img src="{{ asset('img/fire out images/14 porta-corta-fogo-p90-abnt-11742.webp') }}" alt="Porta Corta Fogo P-90 Certificada ABNT" width="80" height="60">
           </div>
-          <div class="pcf-thumb" data-src="{{ asset('img/fire out images/porta corta fogo.webp') }}">
-            <img src="{{ asset('img/fire out images/porta corta fogo.webp') }}" alt="">
+          <div class="pcf-thumb" data-src="{{ asset('img/fire out images/pcf-fabricacao-1.webp') }}" data-title="Estoque & Produção em Lote na Fábrica">
+            <img src="{{ asset('img/fire out images/pcf-fabricacao-1.webp') }}" alt="Estoque & Produção em Lote na Fábrica" width="80" height="60">
           </div>
-          <div class="pcf-thumb pcf-thumb-empty">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          </div>
-          <div class="pcf-thumb pcf-thumb-empty">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <div class="pcf-thumb" data-src="{{ asset('img/fire out images/pcf-galvanizada-e-pintada.webp') }}" data-title="Portas de Aço Galvanizado e Pintadas">
+            <img src="{{ asset('img/fire out images/pcf-galvanizada-e-pintada.webp') }}" alt="Portas de Aço Galvanizado e Pintadas" width="80" height="60">
           </div>
         </div>
       </div>
@@ -344,7 +376,7 @@
           </div>
           <div class="pcf-meta-cell">
             <div class="pcf-meta-key">Norma</div>
-            <div class="pcf-meta-val">ABNT NBR 11742</div>
+            <div class="pcf-meta-val">Normas ABNT</div>
           </div>
           <div class="pcf-meta-cell">
             <div class="pcf-meta-key">Acabamento</div>
@@ -378,7 +410,7 @@
         </ul>
 
         <div class="pcf-actions">
-          <a href="https://wa.me/5521966969836?text=Ol%C3%A1%21+Gostaria+de+um+or%C3%A7amento+para+Porta+Corta-Fogo+P-90." class="btn-wa" target="_blank" rel="noopener">
+          <a href="https://wa.me/5521966969836?text=Ol%C3%A1%21+Gostaria+de+um+or%C3%A7amento+para+Porta+Corta-Fogo+P-90." class="btn-wa" target="_blank" rel="noopener" onclick="return gtag_report_conversion(this.href);">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
             Solicitar Orçamento
           </a>
@@ -494,7 +526,7 @@
           <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <div class="pcf-feat-title">Certificação ABNT</div>
-        <div class="pcf-feat-text">Conformidade total com a ABNT NBR 11742. Laudo técnico de conformidade emitido em cada instalação.</div>
+        <div class="pcf-feat-text">Conformidade total com as normas ABNT. Laudo técnico de conformidade emitido em cada instalação.</div>
       </div>
       <div class="pcf-feat-card">
         <div class="pcf-feat-icon">
@@ -514,6 +546,49 @@
   </div>
 </section>
 
+{{-- 4.5. GALERIA DE FÁBRICA --}}
+<section class="pcf-factory">
+  <div class="pcf-wrap">
+    <div style="text-align:center;max-width:700px;margin:0 auto 40px;">
+      <div class="s-label" style="justify-content:center;">Produção Própria — Fire Out</div>
+      <h2 class="s-title">CONFIRA NOSSA FÁBRICA<br>E <em style="color:var(--red);font-style:normal;">PROCESSO DE FABRICAÇÃO</em></h2>
+      <p class="s-body" style="margin-bottom:0;">Fabricação com chapas galvanizadas de alta resistência, corte de precisão, montagem estrutural e acabamento técnico alinhado às normas ABNT.</p>
+    </div>
+
+    <div class="pcf-factory-grid">
+      <div class="pcf-factory-card">
+        <div class="pcf-factory-img-wrap" onclick="document.getElementById('pcf-main-img').src='{{ asset('img/fire out images/14 porta-corta-fogo-p90-abnt-11742.webp') }}';document.getElementById('pcf-main-caption').textContent='Porta Corta-Fogo P-90 Certificada ABNT';window.scrollTo({top:document.querySelector('.pcf-showcase').offsetTop - 80,behavior:'smooth'});">
+          <img src="{{ asset('img/fire out images/14 porta-corta-fogo-p90-abnt-11742.webp') }}" alt="Porta Corta-Fogo P-90 Certificada ABNT" width="400" height="260" loading="lazy">
+        </div>
+        <div class="pcf-factory-body">
+          <div class="pcf-factory-title">Porta Corta-Fogo P-90</div>
+          <div class="pcf-factory-desc">Porta Corta-Fogo P-90 Certificada ABNT com alto isolamento térmico e resistência.</div>
+        </div>
+      </div>
+
+      <div class="pcf-factory-card">
+        <div class="pcf-factory-img-wrap" onclick="document.getElementById('pcf-main-img').src='{{ asset('img/fire out images/pcf-fabricacao-1.webp') }}';document.getElementById('pcf-main-caption').textContent='Estoque & Produção em Lote na Fábrica';window.scrollTo({top:document.querySelector('.pcf-showcase').offsetTop - 80,behavior:'smooth'});">
+          <img src="{{ asset('img/fire out images/pcf-fabricacao-1.webp') }}" alt="Estoque & Produção em Lote na Fábrica" width="400" height="260" loading="lazy">
+        </div>
+        <div class="pcf-factory-body">
+          <div class="pcf-factory-title">Estoque & Produção em Lote</div>
+          <div class="pcf-factory-desc">Capacidade fabril para atender grandes obras, condomínios e edifícios comerciais.</div>
+        </div>
+      </div>
+
+      <div class="pcf-factory-card">
+        <div class="pcf-factory-img-wrap" onclick="document.getElementById('pcf-main-img').src='{{ asset('img/fire out images/pcf-galvanizada-e-pintada.webp') }}';document.getElementById('pcf-main-caption').textContent='Portas de Aço Galvanizado e Pintadas';window.scrollTo({top:document.querySelector('.pcf-showcase').offsetTop - 80,behavior:'smooth'});">
+          <img src="{{ asset('img/fire out images/pcf-galvanizada-e-pintada.webp') }}" alt="Portas de Aço Galvanizado e Pintadas" width="400" height="260" loading="lazy">
+        </div>
+        <div class="pcf-factory-body">
+          <div class="pcf-factory-title">Linha Galvanizada & Pintada</div>
+          <div class="pcf-factory-desc">Portas de aço galvanizado e opções com acabamento pintado de fábrica.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 {{-- 5. CERTIFICATION BAND --}}
 <section class="pcf-cert-band">
   <div class="pcf-wrap">
@@ -521,7 +596,7 @@
       <div>
         <div class="pcf-cert-seal">
           <div class="pcf-cert-seal-logo">ABNT</div>
-          <div class="pcf-cert-seal-sub">NBR 11742</div>
+          <div class="pcf-cert-seal-sub">CERTIFICADA</div>
         </div>
       </div>
       <div>
@@ -545,7 +620,7 @@
       <p>Fazemos visita técnica e enviamos proposta em até 24h.</p>
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="https://wa.me/5521966969836" class="btn-white" target="_blank" rel="noopener">WhatsApp: (21) 96696-9836</a>
+      <a href="https://wa.me/5521966969836" class="btn-white" target="_blank" rel="noopener" onclick="return gtag_report_conversion('https://wa.me/5521966969836');">WhatsApp: (21) 96696-9836</a>
       <a href="{{ route('contato') }}" class="btn-ghost">Enviar E-mail</a>
     </div>
   </div>
@@ -565,8 +640,11 @@ document.querySelectorAll('[data-pcf-accord]').forEach(btn => {
 document.querySelectorAll('.pcf-thumb[data-src]').forEach(thumb => {
   thumb.addEventListener('click', () => {
     const src = thumb.dataset.src;
+    const title = thumb.dataset.title || '';
     if (!src) return;
     document.getElementById('pcf-main-img').src = src;
+    const cap = document.getElementById('pcf-main-caption');
+    if (cap) cap.textContent = title;
     document.querySelectorAll('.pcf-thumb').forEach(t => t.classList.remove('is-active'));
     thumb.classList.add('is-active');
   });
