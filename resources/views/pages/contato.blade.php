@@ -143,6 +143,11 @@ textarea.form-input { resize:vertical; min-height:140px; }
   .form-row { grid-template-columns:1fr; }
   .contact-form-card { padding:32px 24px; }
 }
+@media(max-width:600px) {
+  .contact-hero { padding:48px 20px 56px; }
+  .contact-body { padding:40px 20px 64px; }
+  .contact-form-card { padding:28px 20px; }
+}
 </style>
 @endpush
 

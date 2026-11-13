@@ -165,6 +165,11 @@
   .c-form-row { grid-template-columns:1fr; }
   .order-summary { position:static; }
 }
+@media(max-width:600px) {
+  .checkout-hero { padding:40px 20px 44px; }
+  .checkout-body { padding:32px 20px 64px; }
+  .checkout-form-card { padding:24px 18px; }
+}
 @media(max-width:560px) {
   .pay-tabs { grid-template-columns:1fr; }
   .card-fields-row { grid-template-columns:1fr; }

@@ -218,7 +218,10 @@
 @media (max-width: 860px) {
   .login-wrap { grid-template-columns: 1fr; }
   .login-right { display: none; }
-  .login-left  { padding: calc(var(--nav-h) + 40px) 28px 48px; align-items: flex-start; }
+  .login-left  { padding: 48px 24px 64px; align-items: flex-start; }
+}
+@media (max-width: 600px) {
+  .login-left  { padding: 36px 20px 48px; }
 }
 </style>
 @endpush

@@ -198,6 +198,7 @@
 @media(max-width:600px) {
   .hero-logo-badge img { width:76px; height:76px; }
   .page-hero { padding:56px 20px 68px; }
+  .page-wrap { padding:0 20px; }
   .hero-actions { flex-direction:column; width:100%; }
   .hero-actions .btn-red,
   .hero-actions .btn-wa { width:100%; justify-content:center; }
@@ -397,7 +398,7 @@
 </section>
 
 <!-- CTA -->
-<div style="max-width:1200px;margin:0 auto 120px;padding:0 48px;">
+<div class="cta-wrap">
   <div class="cta-banner">
     <div>
       <h2>PRECISA DE UM PROJETO<br>OU INSTALAÇÃO?</h2>

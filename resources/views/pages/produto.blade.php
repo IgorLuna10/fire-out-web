@@ -195,6 +195,8 @@
   .pd-related { padding:48px 0 64px; }
 }
 @media(max-width:600px) {
+  .pd-wrap { padding:0 20px; }
+  .pd-breadcrumb { padding:12px 20px; }
   .pd-related-grid { grid-template-columns:repeat(2,1fr); }
   .pd-cart-row { flex-direction:column; align-items:stretch; }
   .pd-add-btn { height:48px; }

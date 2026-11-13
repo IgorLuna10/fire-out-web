@@ -43,12 +43,15 @@ button { font-family:inherit; cursor:pointer; border:none; background:none; }
 .fo-nav {
   position:fixed; top:0; left:0; width:100%; height:var(--nav-h);
   background:rgba(245,242,237,.96); backdrop-filter:blur(14px);
-  display:flex; align-items:center; justify-content:space-between;
   padding:0 48px; z-index:300;
   border-bottom:1px solid rgba(0,0,0,.06);
   transition:background .3s;
 }
 .fo-nav.scrolled { background:rgba(245,242,237,1); }
+.fo-nav-inner {
+  max-width:1200px; width:100%; height:100%; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between;
+}
 .nav-logo { display:flex; align-items:center; gap:10px; }
 .nav-mark {
   width:34px; height:34px; background:var(--red); border-radius:var(--r-sm);
@@ -162,6 +165,9 @@ button { font-family:inherit; cursor:pointer; border:none; background:none; }
 .s-body { font-size:16px; line-height:1.82; color:#555; margin-bottom:20px; }
 
 /* ── CTA BANNER ── */
+.cta-wrap {
+  max-width:1200px; margin:0 auto 120px; padding:0 48px;
+}
 .cta-banner {
   background:var(--red); border-radius:var(--r-xl);
   padding:56px 56px;
@@ -248,7 +254,13 @@ button { font-family:inherit; cursor:pointer; border:none; background:none; }
   .nav-hamburger { display:flex; }
   .fo-footer .grid { grid-template-columns:1fr 1fr; gap:36px; }
   .fo-footer .inner { padding:0 24px; }
+  .cta-wrap { padding:0 24px; margin-bottom:80px; }
   .cta-banner { padding:40px 32px; flex-direction:column; }
+}
+@media(max-width:600px) {
+  .fo-nav { padding:0 20px; }
+  .fo-footer .inner { padding:0 20px; }
+  .cta-wrap { padding:0 20px; margin-bottom:64px; }
 }
 @media(max-width:540px) {
   .fo-footer .grid { grid-template-columns:1fr; gap:28px; }

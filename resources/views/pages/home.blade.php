@@ -187,6 +187,10 @@
   .hero-stats { gap:24px; }
   .hero-badge { left:20px; bottom:20px; padding:14px 18px; gap:10px; }
   .hero-badge-num { font-size:40px; }
+  .sobre-container,
+  .clientes-container { padding:0 20px; }
+  .section-produtos,
+  .section-missao   { padding:56px 20px; }
 }
 </style>
 @endpush
@@ -300,7 +304,7 @@
 
 
 <!-- CTA -->
-<div style="max-width:1200px;margin:0 auto 120px;padding:0 48px;">
+<div class="cta-wrap">
   <div class="cta-banner">
     <div>
       <h2>PRONTO PARA PROTEGER<br>SUA EDIFICAÇÃO?</h2>

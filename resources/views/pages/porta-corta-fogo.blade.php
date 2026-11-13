@@ -6,9 +6,10 @@
 @push('styles')
 <style>
 /* ── RESET ── */
-.pcf { --gutter:48px; }
-.pcf-wrap { max-width:1200px; margin:0 auto; padding:0 var(--gutter); }
-@media(max-width:768px){ .pcf { --gutter:20px; } }
+:root { --pcf-gutter:48px; }
+.pcf-wrap { max-width:1200px; margin:0 auto; padding:0 var(--pcf-gutter); }
+@media(max-width:900px){ :root { --pcf-gutter:24px; } }
+@media(max-width:600px){ :root { --pcf-gutter:20px; } }
 
 /* ════════════════════════════════════════════
    1. HERO
@@ -27,7 +28,7 @@
   font-family:'Bebas Neue',sans-serif; font-size:240px; letter-spacing:-4px;
   color:rgba(255,255,255,.025); line-height:1; pointer-events:none; white-space:nowrap;
 }
-.pcf-hero-inner { max-width:1200px; margin:0 auto; padding:0 var(--gutter); position:relative; z-index:1; }
+.pcf-hero-inner { max-width:1200px; margin:0 auto; padding:0 var(--pcf-gutter); position:relative; z-index:1; }
 .pcf-hero-nav {
   display:flex; align-items:center; gap:8px;
   font-size:12px; color:rgba(255,255,255,.3); margin-bottom:28px;
@@ -613,7 +614,7 @@
 </section>
 
 {{-- 6. CTA BANNER --}}
-<div style="max-width:1200px;margin:0 auto 120px;padding:48px var(--gutter,48px) 0;">
+<div class="cta-wrap" style="padding-top:48px;">
   <div class="cta-banner">
     <div>
       <h2>PRECISA DE UMA PORTA<br>CORTA-FOGO?</h2>

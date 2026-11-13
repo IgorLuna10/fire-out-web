@@ -18,7 +18,8 @@
 }
 .shop-breadcrumb::before { content:''; width:16px; height:1.5px; background:var(--warm); }
 .shop-title {
-  font-size:22px; font-weight:700; color:var(--ink); letter-spacing:-.3px; line-height:1.2;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(30px,3.8vw,44px); font-weight:400; color:var(--ink); letter-spacing:1.5px; line-height:1;
 }
 
 /* ── CATEGORY TILES ── */
@@ -436,8 +437,11 @@
   .cart-drawer { width:100%; max-width:100%; }
 }
 @media(max-width:600px) {
+  .shop-body { padding:32px 20px 64px; }
+  .shop-bar-inner { padding:0 20px; }
+  .shop-header { padding:18px 20px; }
+  .cat-tiles { padding:0 20px; grid-template-columns:repeat(3,1fr); }
   .prod-grid { grid-template-columns:1fr; }
-  .cat-tiles { grid-template-columns:repeat(3,1fr); }
   .trust-item { padding:12px 14px; font-size:11px; }
 }
 
@@ -492,34 +496,39 @@
       </div>
       <span class="cat-tile-name">Todos</span>
       <span class="cat-tile-count">13 produtos</span>
-    
+    </button>
+
     <button class="cat-tile" data-cat="mangueiras" onclick="filterCat('mangueiras',this)">
       <div class="cat-tile-icon">
         <svg viewBox="0 0 24 24"><path d="M12 2v6m0 0c-3 0-5 2-5 5s2 5 5 5 5-2 5-5-2-5-5-5zM8 22h8"/></svg>
       </div>
       <span class="cat-tile-name">Mangueiras e Hidrantes</span>
       <span class="cat-tile-count">6 produtos</span>
-    
+    </button>
+
     <button class="cat-tile" data-cat="extintores" onclick="filterCat('extintores',this)">
       <div class="cat-tile-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M9 2h6l1 4H8L9 2z"/><rect x="7" y="6" width="10" height="14" rx="2"/><path d="M12 10v4M10 12h4"/></svg>
       </div>
       <span class="cat-tile-name">Extintores e Suportes</span>
       <span class="cat-tile-count">2 produtos</span>
-    
+    </button>
+
     <button class="cat-tile" data-cat="protecao" onclick="filterCat('protecao',this)">
       <div class="cat-tile-icon">
         <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       </div>
       <span class="cat-tile-name">Portas Corta-Fogo</span>
       <span class="cat-tile-count">3 produtos</span>
-    
+    </button>
+
     <button class="cat-tile" data-cat="abracadeiras" onclick="filterCat('abracadeiras',this)">
       <div class="cat-tile-icon">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M3 12h4M17 12h4M12 3v4M12 17v4"/></svg>
       </div>
       <span class="cat-tile-name">Abraçadeiras e Suportes</span>
       <span class="cat-tile-count">{{ $abracadeiras->count() }} tamanhos</span>
+    </button>
     
   </div>
 </div>
@@ -578,7 +587,7 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
               {{ isset($dbPrices[$id]) ? $dbPrices[$id]->price_formatted : 'Sob Consulta' }}
             </div>
             <div class="pcard-actions">
-              <button class="pcard-add" onclick="addToCart('{{ $id }}',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho
+              <button class="pcard-add" onclick="addToCart('{{ $id }}',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho</button>
             </div>
           </div>
         </div>
@@ -601,14 +610,14 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
           <div class="pcard-variants" style="margin-top:12px;">
             <span class="pcard-vlabel">Bitola</span>
             <div class="vpills">
-              <button class="vpill active" data-vi="0" onclick="pickVariant(this,'esguicho')">1½"<small>{{ $dp('esguicho-15') }}</small>
-              <button class="vpill"        data-vi="1" onclick="pickVariant(this,'esguicho')">2½"<small>{{ $dp('esguicho-25') }}</small>
+              <button class="vpill active" data-vi="0" onclick="pickVariant(this,'esguicho')">1½"<small>{{ $dp('esguicho-15') }}</small></button>
+              <button class="vpill"        data-vi="1" onclick="pickVariant(this,'esguicho')">2½"<small>{{ $dp('esguicho-25') }}</small></button>
             </div>
           </div>
           <div class="pcard-footer">
             <div class="pcard-price" id="price-esguicho">{{ $dp('esguicho-15') }}</div>
             <div class="pcard-actions">
-              <button class="pcard-add" onclick="addToCart('esguicho',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho
+              <button class="pcard-add" onclick="addToCart('esguicho',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho</button>
             </div>
           </div>
         </div>
@@ -630,14 +639,14 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
           <div class="pcard-variants" style="margin-top:12px;">
             <span class="pcard-vlabel">Conexão</span>
             <div class="vpills">
-              <button class="vpill active" data-vi="0" onclick="pickVariant(this,'adaptador')">2½" × 1½"<small>{{ $dp('adaptador-2515') }}</small>
-              <button class="vpill"        data-vi="1" onclick="pickVariant(this,'adaptador')">2½"<small>{{ $dp('adaptador-25') }}</small>
+              <button class="vpill active" data-vi="0" onclick="pickVariant(this,'adaptador')">2½" × 1½"<small>{{ $dp('adaptador-2515') }}</small></button>
+              <button class="vpill"        data-vi="1" onclick="pickVariant(this,'adaptador')">2½"<small>{{ $dp('adaptador-25') }}</small></button>
             </div>
           </div>
           <div class="pcard-footer">
             <div class="pcard-price" id="price-adaptador">{{ $dp('adaptador-2515') }}</div>
             <div class="pcard-actions">
-              <button class="pcard-add" onclick="addToCart('adaptador',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho
+              <button class="pcard-add" onclick="addToCart('adaptador',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho</button>
             </div>
           </div>
         </div>
@@ -660,14 +669,14 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
           <div class="pcard-variants" style="margin-top:12px;">
             <span class="pcard-vlabel">Tamanho</span>
             <div class="vpills">
-              <button class="vpill active" data-vi="0" onclick="pickVariant(this,'moldura')">60×40 cm<small>{{ $dp('moldura-6040') }}</small>
-              <button class="vpill"        data-vi="1" onclick="pickVariant(this,'moldura')">70×50 cm<small>{{ $dp('moldura-7050') }}</small>
+              <button class="vpill active" data-vi="0" onclick="pickVariant(this,'moldura')">60×40 cm<small>{{ $dp('moldura-6040') }}</small></button>
+              <button class="vpill"        data-vi="1" onclick="pickVariant(this,'moldura')">70×50 cm<small>{{ $dp('moldura-7050') }}</small></button>
             </div>
           </div>
           <div class="pcard-footer">
             <div class="pcard-price" id="price-moldura">{{ $dp('moldura-6040') }}</div>
             <div class="pcard-actions">
-              <button class="pcard-add" onclick="addToCart('moldura',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho
+              <button class="pcard-add" onclick="addToCart('moldura',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho</button>
             </div>
           </div>
         </div>
@@ -702,7 +711,7 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
           <div class="pcard-footer">
             <div class="pcard-price">{{ $dp('extintor-abc') }}</div>
             <div class="pcard-actions">
-              <button class="pcard-add" onclick="addToCart('extintor-abc',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho
+              <button class="pcard-add" onclick="addToCart('extintor-abc',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho</button>
             </div>
           </div>
         </div>
@@ -724,7 +733,7 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
           <div class="pcard-footer">
             <div class="pcard-price">{{ $dp('tripe') }}</div>
             <div class="pcard-actions">
-              <button class="pcard-add" onclick="addToCart('tripe',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho
+              <button class="pcard-add" onclick="addToCart('tripe',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho</button>
             </div>
           </div>
         </div>
@@ -819,7 +828,7 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
           <div class="pcard-footer">
             <div class="pcard-price">{{ $dp('canopla') }}</div>
             <div class="pcard-actions">
-              <button class="pcard-add" onclick="addToCart('canopla',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho
+              <button class="pcard-add" onclick="addToCart('canopla',this.closest('.prod-card'))"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Adicionar ao Carrinho</button>
             </div>
           </div>
         </div>
@@ -853,7 +862,7 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
                           data-vi="{{ $i }}"
                           onclick="pickVariant(this,'{{ $prodId }}')">
                     Kit {{ $kit['qty'] }} un.<small>{{ $kit['price_formatted'] }}</small>
-                  
+                  </button>
                 @endforeach
               </div>
             </div>
