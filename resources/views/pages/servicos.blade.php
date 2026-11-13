@@ -22,19 +22,6 @@
   max-width:880px; margin:0 auto; position:relative; z-index:1;
   text-align:center; display:flex; flex-direction:column; align-items:center;
 }
-.hero-logo-badge {
-  margin-bottom:20px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-}
-.hero-logo-badge img {
-  width:96px;
-  height:96px;
-  object-fit:contain;
-  display:block;
-  filter:drop-shadow(0 4px 14px rgba(0,0,0,.06));
-}
 .hero-eyebrow {
   display:inline-flex; align-items:center; gap:10px;
   font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase;
@@ -196,7 +183,6 @@
   .page-hero-inner { max-width:100%; }
 }
 @media(max-width:600px) {
-  .hero-logo-badge img { width:76px; height:76px; }
   .page-hero { padding:56px 20px 68px; }
   .page-wrap { padding:0 20px; }
   .hero-actions { flex-direction:column; width:100%; }
@@ -216,9 +202,6 @@
 <!-- HERO -->
 <div class="page-hero">
   <div class="page-hero-inner">
-    <div class="hero-logo-badge">
-      <img src="{{ asset('img/logo/logo-transparent.webp') }}" alt="Fire Out" width="96" height="96">
-    </div>
     <div class="hero-eyebrow">Engenharia de Combate a Incêndio</div>
     <h1>PROJETOS.<br>MANUTENÇÃO.<br><span>INSTALAÇÃO.</span></h1>
     <p class="page-hero-sub">Engenharia especializada em combate a incêndio. Oferecemos execução técnica rigorosa para garantir a proteção total do seu patrimônio e total conformidade para a emissão e renovação de AVCB.</p>
@@ -226,7 +209,7 @@
       <a href="{{ route('contato') }}" class="btn-red">Solicitar Proposta Técnica</a>
       <a href="https://wa.me/5521966969836" target="_blank" class="btn-wa" onclick="return gtag_report_conversion('https://wa.me/5521966969836');">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-        Falar com Engenheiro
+        Fale com Nossa Equipe
       </a>
     </div>
   </div>
