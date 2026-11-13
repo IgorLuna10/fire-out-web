@@ -10,29 +10,38 @@
 /* ── HERO ── */
 .page-hero {
   margin-top:var(--nav-h); background:var(--off);
-  padding:96px 48px 108px; position:relative; overflow:hidden;
+  padding:100px 48px 110px; position:relative; overflow:hidden;
   border-bottom:1px solid rgba(0,0,0,.07);
 }
-.page-hero-inner {
-  max-width:1200px; margin:0 auto; position:relative; z-index:1;
-  display:grid; grid-template-columns:220px 1fr; gap:80px; align-items:center;
+.page-hero::before {
+  content:'SERVIÇOS'; position:absolute; right:-20px; top:50%; transform:translateY(-50%);
+  font-family:'Bebas Neue',sans-serif; font-size:clamp(140px,20vw,260px); letter-spacing:-4px;
+  color:rgba(0,0,0,.025); pointer-events:none; white-space:nowrap;
 }
-.page-hero-logo img {
-  width:200px; height:auto; display:block; opacity:.9;
+.page-hero-inner {
+  max-width:880px; margin:0 auto; position:relative; z-index:1;
+  text-align:center; display:flex; flex-direction:column; align-items:center;
 }
 .hero-eyebrow {
-  display:inline-flex; align-items:center; gap:8px;
+  display:inline-flex; align-items:center; gap:10px;
   font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase;
   color:var(--red); margin-bottom:20px;
 }
-.hero-eyebrow::before { content:''; width:24px; height:2px; background:var(--red); }
+.hero-eyebrow::before,
+.hero-eyebrow::after { content:''; width:24px; height:2px; background:var(--red); }
 .page-hero h1 {
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(56px,7vw,92px); line-height:.93; letter-spacing:2px;
+  font-size:clamp(56px,7.5vw,96px); line-height:.92; letter-spacing:2px;
   color:var(--ink); margin-bottom:24px;
 }
 .page-hero h1 span { color:var(--red); }
-.page-hero-sub { font-size:17px; color:var(--warm); max-width:500px; line-height:1.75; }
+.page-hero-sub {
+  font-size:17px; color:var(--warm); max-width:640px; line-height:1.75;
+  margin:0 auto 36px;
+}
+.hero-actions {
+  display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;
+}
 
 /* ── FEATURED SERVICES (top 2) ── */
 .section-featured { padding:80px 0 0; }
@@ -171,10 +180,13 @@
   .dif-img        { display:none; }
   .page-wrap       { padding:0 24px; }
   .page-hero       { padding:72px 24px 84px; }
-  .page-hero-inner { grid-template-columns:1fr; gap:36px; }
-  .page-hero-logo  { display:none; }
+  .page-hero-inner { max-width:100%; }
 }
 @media(max-width:600px) {
+  .page-hero { padding:56px 20px 68px; }
+  .hero-actions { flex-direction:column; width:100%; }
+  .hero-actions .btn-red,
+  .hero-actions .btn-wa { width:100%; justify-content:center; }
   .strip-grid { grid-template-columns:1fr; }
   .logo-strip-item { flex:0 0 50%; }
   .logo-strip-item:nth-child(4n)        { border-right:1px solid rgba(0,0,0,.07); }
@@ -189,13 +201,15 @@
 <!-- HERO -->
 <div class="page-hero">
   <div class="page-hero-inner">
-    <div class="page-hero-logo">
-      <img src="{{ asset('img/logo/dark-logo.webp') }}" alt="Fire Out" width="140" height="140">
-    </div>
-    <div>
-      <div class="hero-eyebrow">Engenharia de Combate a Incêndio</div>
-      <h1>PROJETOS.<br>MANUTENÇÃO.<br><span>INSTALAÇÃO.</span></h1>
-      <p class="page-hero-sub">Engenharia especializada em combate a incêndio. Oferecemos execução técnica rigorosa para garantir a proteção total do seu patrimônio e total conformidade para a emissão e renovação de AVCB.</p>
+    <div class="hero-eyebrow">Engenharia de Combate a Incêndio</div>
+    <h1>PROJETOS.<br>MANUTENÇÃO.<br><span>INSTALAÇÃO.</span></h1>
+    <p class="page-hero-sub">Engenharia especializada em combate a incêndio. Oferecemos execução técnica rigorosa para garantir a proteção total do seu patrimônio e total conformidade para a emissão e renovação de AVCB.</p>
+    <div class="hero-actions">
+      <a href="{{ route('contato') }}" class="btn-red">Solicitar Proposta Técnica</a>
+      <a href="https://wa.me/5521966969836" target="_blank" class="btn-wa" onclick="return gtag_report_conversion('https://wa.me/5521966969836');">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+        Falar com Engenheiro
+      </a>
     </div>
   </div>
 </div>
