@@ -55,7 +55,27 @@
     @if(request()->routeIs('home'))
     <link rel="preload" as="image" href="{{ asset('img/fire out images/foraAcao.webp') }}" type="image/webp" fetchpriority="high">
     @endif
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @php
+      $manifestPath = public_path('build/manifest.json');
+      $cssAsset = null;
+      $jsAsset = null;
+      if (file_exists($manifestPath)) {
+          $manifest = json_decode(file_get_contents($manifestPath), true);
+          $cssAsset = $manifest['resources/css/app.css']['file'] ?? null;
+          $jsAsset = $manifest['resources/js/app.js']['file'] ?? null;
+      }
+    @endphp
+    @if($cssAsset)
+      <link rel="preload" as="style" href="/build/{{ $cssAsset }}">
+      <link rel="stylesheet" href="/build/{{ $cssAsset }}">
+    @else
+      @vite(['resources/css/app.css'])
+    @endif
+    @if($jsAsset)
+      <script type="module" src="/build/{{ $jsAsset }}"></script>
+    @else
+      @vite(['resources/js/app.js'])
+    @endif
     <link rel="icon" href="{{ asset('img/logo/icon.webp') }}" type="image/webp">
     <style>
       .skip-link {
