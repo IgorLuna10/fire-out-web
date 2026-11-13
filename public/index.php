@@ -5,9 +5,19 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// Determine basePath (supports both production /home/fireout/fire-out + www and standard local setup)
-$serverApp = __DIR__.'/../fire-out';
-$appPath = (is_dir($serverApp) && file_exists($serverApp.'/vendor/autoload.php')) ? $serverApp : __DIR__.'/..';
+// Locate Laravel application root:
+// 1. Production cPanel server: /home/fireout/fire-out (DocumentRoot is /home/fireout/www)
+// 2. Relative sibling: /www/../fire-out
+// 3. Local development root or parent
+if (file_exists('/home/fireout/fire-out/vendor/autoload.php')) {
+    $appPath = '/home/fireout/fire-out';
+} elseif (file_exists(__DIR__.'/../fire-out/vendor/autoload.php')) {
+    $appPath = __DIR__.'/../fire-out';
+} elseif (file_exists(__DIR__.'/vendor/autoload.php')) {
+    $appPath = __DIR__;
+} else {
+    $appPath = dirname(__DIR__);
+}
 
 // Determine if the application is in maintenance mode...
 if (file_exists($maintenance = $appPath.'/storage/framework/maintenance.php')) {
