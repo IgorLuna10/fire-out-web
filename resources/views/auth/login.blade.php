@@ -230,8 +230,8 @@
   <div class="login-left">
     <div class="login-form-inner">
 
-      <h1 class="login-form-title">ENTRAR</h1>
-      <p class="login-form-sub">Acesse sua conta para acompanhar seus pedidos.</p>
+      <h1 class="login-form-title">ÁREA RESTRITA</h1>
+      <p class="login-form-sub">Acesso restrito à equipe administrativa da Fire Out.</p>
 
       @if(session('error'))
         <div class="alert-error">{{ session('error') }}</div>
@@ -255,9 +255,8 @@
           @error('email')<div class="form-error" id="login-email-error" role="alert">{{ $message }}</div>@enderror
         </div>
         <div class="form-group">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;">
+          <div style="margin-bottom:7px;">
             <label class="form-label" for="login-password" style="margin-bottom:0;">Senha</label>
-            <a href="{{ route('password.request') }}" style="font-size:12px;color:var(--red);font-weight:600;text-decoration:none;">Esqueceu a senha?</a>
           </div>
           <div style="position:relative;">
             <input class="form-input {{ $errors->has('password') ? 'error' : '' }}"
@@ -281,9 +280,7 @@
         <button type="submit" class="btn-login">Entrar</button>
       </form>
 
-      <div class="login-footer">
-        Não tem conta? <a href="{{ route('register') }}">Criar conta</a>
-      </div>
+
 
     </div>
   </div>

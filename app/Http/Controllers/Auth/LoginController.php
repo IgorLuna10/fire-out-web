@@ -12,10 +12,8 @@ class LoginController extends Controller
 {
     public function show()
     {
-        if (Auth::check()) {
-            return Auth::user()->isAdmin()
-                ? redirect()->route('admin.dashboard')
-                : redirect()->route('profile');
+        if (Auth::check() && Auth::user()->isAdmin()) {
+            return redirect()->route('admin.dashboard');
         }
         return view('auth.login');
     }
@@ -44,9 +42,13 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             RateLimiter::clear($throttleKey);
             $request->session()->regenerate();
-            return Auth::user()->isAdmin()
-                ? redirect()->route('admin.dashboard')
-                : redirect()->intended(route('profile'));
+
+            if (!Auth::user()->isAdmin()) {
+                Auth::logout();
+                return back()->withErrors(['email' => 'Acesso restrito à equipe Fire Out.'])->onlyInput('email');
+            }
+
+            return redirect()->route('admin.dashboard');
         }
 
         RateLimiter::hit($throttleKey, 60);

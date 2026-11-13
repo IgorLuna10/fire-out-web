@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use MercadoPago\MercadoPagoConfig;
-use MercadoPago\Client\Payment\PaymentClient;
-use MercadoPago\Exceptions\MPApiException;
+
 
 class CheckoutController extends Controller
 {
@@ -30,11 +28,9 @@ class CheckoutController extends Controller
         $cart = json_decode($request->session()->get('checkout_cart', '[]'), true);
         if (empty($cart)) return redirect()->route('produtos');
 
-        $user           = Auth::user();
-        $defaultAddress = $user ? $user->defaultAddress()->first() : null;
-        $cartSubtotal   = collect($cart)->sum(fn($i) => ($i['price'] ?? 0) * ($i['qty'] ?? 1));
+        $cartSubtotal = collect($cart)->sum(fn($i) => ($i['price'] ?? 0) * ($i['qty'] ?? 1));
 
-        return view('pages.checkout', compact('cart', 'user', 'defaultAddress', 'cartSubtotal'));
+        return view('pages.checkout', compact('cart', 'cartSubtotal'));
     }
 
     public function submit(Request $request)
@@ -222,34 +218,5 @@ class CheckoutController extends Controller
         return view('pages.pedido-confirmado', compact('order', 'waUrl'));
     }
 
-    // ── Webhook from Mercado Pago ─────────────────────────────────────────────
-    public function webhook(Request $request)
-    {
-        $type = $request->input('type');
-        if ($type !== 'payment') return response()->json(['ok' => true]);
 
-        $paymentId = $request->input('data.id');
-        if (!$paymentId) return response()->json(['ok' => true]);
-
-        try {
-            MercadoPagoConfig::setAccessToken(config('services.mercadopago.access_token'));
-            $client  = new PaymentClient();
-            $payment = $client->get((int) $paymentId);
-
-            $orderNumber = $payment->external_reference;
-            $status      = match ($payment->status) {
-                'approved'   => 'paid',
-                'cancelled'  => 'cancelled',
-                'rejected'   => 'payment_failed',
-                default      => 'awaiting_payment',
-            };
-
-            Order::where('order_number', $orderNumber)->update(['status' => $status]);
-
-        } catch (\Exception $e) {
-            Log::error('MP Webhook error: ' . $e->getMessage());
-        }
-
-        return response()->json(['ok' => true]);
-    }
 }

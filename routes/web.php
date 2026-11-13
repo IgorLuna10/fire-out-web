@@ -7,12 +7,8 @@ use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ServicosController;
 use App\Http\Controllers\PortaCortaFogoController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Middleware\AdminMiddleware;
 
 // ── PUBLIC PAGES ──
@@ -25,33 +21,16 @@ Route::get('/contato',         [ContatoController::class,       'index'])->name(
 Route::post('/contato',        [ContatoController::class,       'send'])->middleware('throttle:5,1')->name('contato.send');
 Route::get('/obrigado',        [ContatoController::class,       'obrigado'])->name('obrigado');
 
-// ── CHECKOUT ──
+// ── CHECKOUT (Guest Quote Request) ──
 Route::post('/checkout/store',  [CheckoutController::class, 'store'])->name('checkout.store');
 Route::get('/checkout',         [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout/submit', [CheckoutController::class, 'submit'])->middleware('throttle:10,1')->name('checkout.submit');
 Route::get('/pedido-confirmado',[CheckoutController::class, 'confirmado'])->name('pedido-confirmado');
-Route::post('/webhook/mercadopago', [CheckoutController::class, 'webhook'])->middleware('throttle:60,1')->name('mp.webhook');
 
-// ── AUTH ──
-Route::get('/login',                    [LoginController::class,          'show'])->name('login');
-Route::post('/login',                   [LoginController::class,          'login'])->middleware('throttle:30,1')->name('login.post');
-Route::post('/logout',                  [LoginController::class,          'logout'])->name('logout');
-Route::get('/register',                 [RegisterController::class,       'show'])->name('register');
-Route::post('/register',                [RegisterController::class,       'register'])->middleware('throttle:10,1')->name('register.post');
-Route::get('/esqueci-minha-senha',       [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-Route::post('/esqueci-minha-senha',      [ForgotPasswordController::class, 'sendResetLinkEmail'])->middleware('throttle:5,1')->name('password.email');
-Route::get('/redefinir-senha/{token}',  [ResetPasswordController::class,  'showResetForm'])->name('password.reset');
-Route::post('/redefinir-senha',         [ResetPasswordController::class,  'reset'])->middleware('throttle:5,1')->name('password.update');
-
-// ── CUSTOMER (authenticated) ──
-Route::middleware(['auth'])->group(function () {
-    Route::get('/minha-conta',            [ProfileController::class, 'index'])->name('profile');
-    Route::post('/minha-conta/info',      [ProfileController::class, 'updateInfo'])->name('profile.info');
-    Route::post('/minha-conta/senha',     [ProfileController::class, 'updatePassword'])->name('profile.password');
-    Route::post('/minha-conta/endereco',  [ProfileController::class, 'storeAddress'])->name('profile.address.store');
-    Route::delete('/minha-conta/endereco/{address}', [ProfileController::class, 'deleteAddress'])->name('profile.address.delete');
-    Route::post('/minha-conta/endereco/{address}/padrao', [ProfileController::class, 'setDefaultAddress'])->name('profile.address.default');
-});
+// ── STAFF / ADMIN AUTH ──
+Route::get('/login',            [LoginController::class, 'show'])->name('login');
+Route::post('/login',           [LoginController::class, 'login'])->middleware('throttle:30,1')->name('login.post');
+Route::post('/logout',          [LoginController::class, 'logout'])->name('logout');
 
 // ── ADMIN ──
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {

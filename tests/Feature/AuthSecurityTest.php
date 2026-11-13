@@ -22,14 +22,13 @@ class AuthSecurityTest extends TestCase
         RateLimiter::clear('brute@fireout.com.br|192.168.1.50');
     }
 
-    public function test_login_and_register_are_not_exempt_from_csrf(): void
+    public function test_login_is_not_exempt_from_csrf(): void
     {
         $middleware = app(PreventRequestForgery::class);
         $excluded = $middleware->getExcludedPaths();
 
         $this->assertNotContains('login', $excluded, 'Route /login must not be exempted from CSRF.');
-        $this->assertNotContains('register', $excluded, 'Route /register must not be exempted from CSRF.');
-        $this->assertContains('webhook/mercadopago', $excluded, 'Webhook should remain exempted.');
+        $this->assertEmpty($excluded, 'No routes should be exempted from CSRF.');
     }
 
     public function test_login_rate_limiting_per_account_and_ip(): void
@@ -38,6 +37,7 @@ class AuthSecurityTest extends TestCase
         User::factory()->create([
             'email' => $email,
             'password' => Hash::make('SenhaCorreta123!'),
+            'role' => 'admin',
         ]);
 
         // 5 consecutive failed attempts
@@ -65,9 +65,9 @@ class AuthSecurityTest extends TestCase
         User::factory()->create([
             'email' => $email,
             'password' => Hash::make('SenhaValida123!'),
+            'role' => 'admin',
         ]);
 
-        // Attempt 5 times rotating X-Forwarded-For header from an untrusted client IP (192.168.1.50)
         for ($i = 1; $i <= 5; $i++) {
             $this->withServerVariables([
                 'REMOTE_ADDR' => '192.168.1.50',
@@ -78,7 +78,6 @@ class AuthSecurityTest extends TestCase
             ]);
         }
 
-        // 6th attempt with another spoofed IP must still be throttled because 192.168.1.50 is not a trusted proxy
         $response = $this->withServerVariables([
             'REMOTE_ADDR' => '192.168.1.50',
             'HTTP_X_FORWARDED_FOR' => '10.0.0.99',
@@ -92,23 +91,37 @@ class AuthSecurityTest extends TestCase
         $this->assertStringContainsString('Muitas tentativas de login. Tente novamente em', $error);
     }
 
-    public function test_password_change_regenerates_session(): void
+    public function test_non_admin_cannot_login_to_admin_area(): void
     {
-        $user = User::factory()->create([
-            'password' => Hash::make('SenhaAtual123!'),
+        $customer = User::factory()->create([
+            'email' => 'cliente@fireout.com.br',
+            'password' => Hash::make('SenhaSegura123!'),
+            'role' => 'customer',
         ]);
 
-        $this->actingAs($user);
-        $initialSessionId = session()->getId();
-
-        $response = $this->post('/minha-conta/senha', [
-            'current_password' => 'SenhaAtual123!',
-            'password' => 'NovaSenhaForte123!',
-            'password_confirmation' => 'NovaSenhaForte123!',
+        $response = $this->post('/login', [
+            'email' => 'cliente@fireout.com.br',
+            'password' => 'SenhaSegura123!',
         ]);
 
-        $response->assertSessionHas('success', 'Senha alterada com sucesso.');
-        $this->assertTrue(Hash::check('NovaSenhaForte123!', $user->fresh()->password));
-        $this->assertNotEquals($initialSessionId, session()->getId());
+        $response->assertSessionHasErrors('email');
+        $this->assertGuest();
+    }
+
+    public function test_admin_logs_in_and_redirects_to_dashboard(): void
+    {
+        $admin = User::factory()->create([
+            'email' => 'admin@fireout.com.br',
+            'password' => Hash::make('SenhaAdminForte123!'),
+            'role' => 'admin',
+        ]);
+
+        $response = $this->post('/login', [
+            'email' => 'admin@fireout.com.br',
+            'password' => 'SenhaAdminForte123!',
+        ]);
+
+        $response->assertRedirect(route('admin.dashboard'));
+        $this->assertAuthenticatedAs($admin);
     }
 }

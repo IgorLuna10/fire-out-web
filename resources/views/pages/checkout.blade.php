@@ -310,33 +310,16 @@
 
       {{-- ADDRESS SECTION --}}
       <div style="margin-bottom:24px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div style="margin-bottom:14px;">
           <span class="c-label" style="margin:0;">Endereço de Entrega</span>
-          @if($defaultAddress)
-            <span style="font-size:11px;color:#16a34a;font-weight:600;">
-              ✓ Carregado do seu perfil
-            </span>
-          @else
-            <span id="addr-required-note" style="font-size:11px;color:var(--warm);display:none;">
-              * Obrigatório para Boleto
-            </span>
-          @endif
         </div>
-        @if($defaultAddress && !old('rua'))
-          <div style="padding:12px 16px;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.2);border-radius:10px;font-size:13px;color:#15803d;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
-            <span>{{ $defaultAddress->full_address }}</span>
-            <button type="button" onclick="toggleAddrFields()" style="font-size:12px;font-weight:600;color:#15803d;background:none;border:none;cursor:pointer;white-space:nowrap;">Alterar</button>
-          </div>
-          <div id="addr-fields" style="display:none;">
-        @else
-          <div id="addr-fields">
-        @endif
+        <div id="addr-fields">
           <div class="c-form-row">
             <div class="c-form-group" style="margin-bottom:0;">
               <label class="c-label" for="ship-cep">CEP</label>
               <input type="text" class="c-input @error('cep') is-invalid @enderror"
                      id="ship-cep" name="cep"
-                     value="{{ old('cep', $defaultAddress?->zipcode) }}"
+                     value="{{ old('cep') }}"
                      placeholder="00000-000" maxlength="9" autocomplete="postal-code"
                      @error('cep') aria-invalid="true" aria-describedby="ship-cep-error" @enderror>
               @error('cep')<div id="ship-cep-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
@@ -345,7 +328,7 @@
               <label class="c-label" for="ship-numero">Número</label>
               <input type="text" class="c-input @error('numero') is-invalid @enderror"
                      id="ship-numero" name="numero"
-                     value="{{ old('numero', $defaultAddress?->number) }}"
+                     value="{{ old('numero') }}"
                      placeholder="123"
                      @error('numero') aria-invalid="true" aria-describedby="ship-numero-error" @enderror>
               @error('numero')<div id="ship-numero-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
@@ -355,7 +338,7 @@
             <label class="c-label" for="ship-rua">Rua / Avenida</label>
             <input type="text" class="c-input @error('rua') is-invalid @enderror"
                    id="ship-rua" name="rua"
-                   value="{{ old('rua', $defaultAddress?->street) }}"
+                   value="{{ old('rua') }}"
                    placeholder="Rua das Flores, Av. Paulista…" autocomplete="address-line1"
                    @error('rua') aria-invalid="true" aria-describedby="ship-rua-error" @enderror>
             @error('rua')<div id="ship-rua-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
@@ -365,7 +348,7 @@
               <label class="c-label" for="ship-bairro">Bairro</label>
               <input type="text" class="c-input @error('bairro') is-invalid @enderror"
                      id="ship-bairro" name="bairro"
-                     value="{{ old('bairro', $defaultAddress?->neighborhood) }}"
+                     value="{{ old('bairro') }}"
                      placeholder="Centro" autocomplete="address-level3"
                      @error('bairro') aria-invalid="true" aria-describedby="ship-bairro-error" @enderror>
               @error('bairro')<div id="ship-bairro-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
@@ -374,7 +357,7 @@
               <label class="c-label" for="ship-complemento">Complemento <small style="font-weight:400;text-transform:none;letter-spacing:0;">(opcional)</small></label>
               <input type="text" class="c-input"
                      id="ship-complemento" name="complemento"
-                     value="{{ old('complemento', $defaultAddress?->complement) }}"
+                     value="{{ old('complemento') }}"
                      placeholder="Apto 4, Bloco B…" autocomplete="address-line2">
             </div>
           </div>
@@ -383,7 +366,7 @@
               <label class="c-label" for="ship-cidade">Cidade</label>
               <input type="text" class="c-input @error('cidade') is-invalid @enderror"
                      id="ship-cidade" name="cidade"
-                     value="{{ old('cidade', $defaultAddress?->city) }}"
+                     value="{{ old('cidade') }}"
                      placeholder="Rio de Janeiro" autocomplete="address-level2"
                      @error('cidade') aria-invalid="true" aria-describedby="ship-cidade-error" @enderror>
               @error('cidade')<div id="ship-cidade-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
@@ -392,7 +375,7 @@
               <label class="c-label" for="ship-estado">Estado (UF)</label>
               <input type="text" class="c-input @error('estado') is-invalid @enderror"
                      id="ship-estado" name="estado"
-                     value="{{ old('estado', $defaultAddress?->state) }}"
+                     value="{{ old('estado') }}"
                      placeholder="RJ" maxlength="2" style="text-transform:uppercase;" autocomplete="address-level1"
                      @error('estado') aria-invalid="true" aria-describedby="ship-estado-error" @enderror>
               @error('estado')<div id="ship-estado-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
@@ -400,17 +383,7 @@
           </div>
         </div>
 
-        @if(!$defaultAddress)
-          <p style="font-size:12px;color:var(--warm);margin-top:10px;line-height:1.5;">
-            Salve endereços no seu
-            @auth
-              <a href="{{ route('profile') }}#addresses" style="color:var(--red);font-weight:600;">perfil</a>
-            @else
-              <a href="{{ route('register') }}" style="color:var(--red);font-weight:600;">perfil</a>
-            @endauth
-            para preenchimento automático nos próximos pedidos.
-          </p>
-        @endif
+
       </div>
 
       <div class="c-form-group">
@@ -435,32 +408,7 @@
 @endsection
 
 @push('scripts')
-<script src="https://sdk.mercadopago.com/js/v2"></script>
 <script>
-/* ── Payment tab selector ── */
-function selectPay(method, btn) {
-  document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.pay-panel').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('panel-' + method).classList.add('active');
-  document.getElementById('pagamentoInput').value = method;
-  // Show "required" note for boleto
-  const note = document.getElementById('addr-required-note');
-  if (note) note.style.display = method === 'boleto' ? 'inline' : 'none';
-  // Auto-expand address fields when boleto is selected
-  if (method === 'boleto') {
-    const fields = document.getElementById('addr-fields');
-    if (fields && fields.style.display === 'none') toggleAddrFields();
-  }
-}
-
-/* ── Address fields toggle (when default address is loaded) ── */
-function toggleAddrFields() {
-  const f = document.getElementById('addr-fields');
-  if (!f) return;
-  f.style.display = f.style.display === 'none' ? 'block' : 'none';
-}
-
 /* ── CPF / CNPJ ── */
 function setDocType(type, btn) {
   document.querySelectorAll('.doc-toggle-btn').forEach(b => {
@@ -494,84 +442,6 @@ function maskDoc(el) {
   }
   el.value = v;
 }
-
-/* ── Card input formatting ── */
-function fmtCard(el) {
-  let v = el.value.replace(/\D/g,'').substring(0,16);
-  el.value = v.replace(/(.{4})/g,'$1 ').trim();
-}
-
-function fmtExpiry(el) {
-  let v = el.value.replace(/\D/g,'').substring(0,4);
-  if (v.length >= 3) v = v.substring(0,2) + '/' + v.substring(2);
-  el.value = v;
-}
-
-/* ── Mercado Pago card tokenization ── */
-const _mpPublicKey   = '{{ config("services.mercadopago.public_key") }}';
-const _cartTotal     = '{{ number_format($cartSubtotal, 2, ".", "") }}';
-let   _mpCardForm    = null;
-let   _mpSkipIntercept = false;
-
-function mountMPCardForm() {
-  if (_mpCardForm || !_mpPublicKey) return;
-  try {
-    const mp = new MercadoPago(_mpPublicKey, { locale: 'pt-BR' });
-    _mpCardForm = mp.cardForm({
-      amount: _cartTotal,
-      iframe: false,
-      form: {
-        id: 'checkoutSubmitForm',
-        cardNumber:     { id: 'form-checkout__cardNumber',     placeholder: '0000 0000 0000 0000' },
-        expirationDate: { id: 'form-checkout__expirationDate', placeholder: 'MM/AA' },
-        securityCode:   { id: 'form-checkout__securityCode',   placeholder: 'CVV' },
-        cardholderName: { id: 'form-checkout__cardholderName' },
-        issuer:         { id: 'form-checkout__issuer' },
-        installments:   { id: 'form-checkout__installments' },
-      },
-      callbacks: {
-        onFormMounted: err => { if (err) console.warn('MP mount:', err); },
-        onSubmit: event => {
-          event.preventDefault();
-          if (_mpSkipIntercept) { _mpSkipIntercept = false; return; }
-
-          const payMethod = document.getElementById('pagamentoInput').value;
-          if (payMethod !== 'cartao') {
-            // PIX / Boleto — bypass tokenisation and submit directly
-            _mpSkipIntercept = true;
-            document.getElementById('checkoutSubmitForm').submit();
-            return;
-          }
-
-          // Cartão — get token from MP
-          const data = _mpCardForm.getCardFormData();
-          const errEl = document.getElementById('mp-card-error');
-          if (!data.token) {
-            errEl.textContent = 'Não foi possível processar o cartão. Verifique os dados e tente novamente.';
-            errEl.style.display = 'block';
-            return;
-          }
-          errEl.style.display = 'none';
-          document.getElementById('mpCardToken').value         = data.token;
-          document.getElementById('mpPaymentMethodId').value   = data.paymentMethodId || '';
-          _mpSkipIntercept = true;
-          document.getElementById('checkoutSubmitForm').submit();
-        },
-        onError: errs => {
-          console.error('MP CardForm errors:', errs);
-        },
-      },
-    });
-  } catch(e) {
-    console.error('MP init error:', e);
-  }
-}
-
-// For PIX/Boleto: ensure form submits normally even if MP intercepts
-document.getElementById('checkoutSubmitForm').addEventListener('submit', function(e) {
-  const payMethod = document.getElementById('pagamentoInput').value;
-  if (payMethod !== 'cartao' && !_mpCardForm) return; // no MP loaded, submit normally
-});
 
 document.addEventListener('DOMContentLoaded', function() {
   const firstInvalid = document.querySelector('[aria-invalid="true"]');

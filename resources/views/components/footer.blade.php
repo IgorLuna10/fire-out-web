@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="f-bottom">
-      <p>&copy; {{ date('Y') }} Fire Out. Todos os direitos reservados.</p>
+      <p>&copy; {{ date('Y') }} Fire Out. Todos os direitos reservados. <a href="{{ route('login') }}" style="opacity:.3;color:inherit;font-size:11px;margin-left:6px;text-decoration:none;" title="Acesso Administrativo">Acesso Restrito</a></p>
       <p>Rio de Janeiro — Brasil</p>
     </div>
   </div>

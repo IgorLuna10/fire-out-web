@@ -35,14 +35,6 @@ return [
         ],
     ],
 
-    'recaptcha' => [
-        'site_key' => env('RECAPTCHA_SITE_KEY'),
-        'secret'   => env('RECAPTCHA_SECRET_KEY'),
-    ],
 
-    'mercadopago' => [
-        'access_token' => env('MP_ACCESS_TOKEN'),
-        'public_key'   => env('MP_PUBLIC_KEY'),
-    ],
 
 ];

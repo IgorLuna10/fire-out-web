@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -31,7 +30,7 @@ class FormAccessibilityTest extends TestCase
         $response = $this->get('/login');
         $response->assertStatus(200);
 
-        // Labels linked to IDs
+        // Labels linked to IDs (WCAG 2.2 SC 1.3.1)
         $response->assertSee('for="login-email"', false);
         $response->assertSee('id="login-email"', false);
         $response->assertSee('autocomplete="username"', false);
@@ -40,70 +39,58 @@ class FormAccessibilityTest extends TestCase
         $response->assertSee('id="login-password"', false);
         $response->assertSee('autocomplete="current-password"', false);
 
-        // Show/hide toggle button
+        // Show/hide toggle button (WCAG 2.2 SC 4.1.2, SC 3.3.8)
         $response->assertSee('aria-label="Mostrar senha"', false);
         $response->assertSee('aria-pressed="false"', false);
-
-        // Link to forgot password
-        $response->assertSee(route('password.request'), false);
     }
 
-    public function test_register_page_markup_accessibility(): void
+    public function test_checkout_form_markup_accessibility(): void
     {
-        $response = $this->get('/register');
+        // Place an item in cart session
+        $cart = [
+            ['prodId' => 'pcf-p90', 'name' => 'Porta Corta-Fogo P-90', 'qty' => 1, 'price' => null]
+        ];
+
+        $response = $this->withSession(['checkout_cart' => json_encode($cart)])->get('/checkout');
         $response->assertStatus(200);
 
-        // Labels and autocompletes
-        $response->assertSee('for="reg-name"', false);
-        $response->assertSee('id="reg-name"', false);
-        $response->assertSee('autocomplete="name"', false);
+        // Explicit labels and IDs
+        $response->assertSee('for="nome"', false);
+        $response->assertSee('id="nome"', false);
+        $response->assertSee('for="telefone"', false);
+        $response->assertSee('id="telefone"', false);
+        $response->assertSee('for="email"', false);
+        $response->assertSee('id="email"', false);
+        $response->assertSee('for="documentNumber"', false);
+        $response->assertSee('id="documentNumber"', false);
 
-        $response->assertSee('for="reg-email"', false);
-        $response->assertSee('id="reg-email"', false);
-        $response->assertSee('autocomplete="email"', false);
+        // Document toggle group
+        $response->assertSee('role="group"', false);
+        $response->assertSee('aria-label="Tipo de documento"', false);
+        $response->assertSee('aria-pressed="true"', false);
 
-        $response->assertSee('for="phone-input"', false);
-        $response->assertSee('id="phone-input"', false);
-        $response->assertSee('autocomplete="tel"', false);
-
-        $response->assertSee('for="password-input"', false);
-        $response->assertSee('id="password-input"', false);
-        $response->assertSee('autocomplete="new-password"', false);
-        $response->assertSee('aria-describedby="password-hint"', false);
-
-        // Honeypot field exists with aria-hidden
-        $response->assertSee('id="website_hp"', false);
-        $response->assertSee('aria-hidden="true"', false);
+        // Address fields
+        $response->assertSee('for="ship-cep"', false);
+        $response->assertSee('id="ship-cep"', false);
+        $response->assertSee('for="ship-numero"', false);
+        $response->assertSee('id="ship-numero"', false);
+        $response->assertSee('for="ship-rua"', false);
+        $response->assertSee('id="ship-rua"', false);
     }
 
-    public function test_profile_page_renders_aria_tabs_and_controls(): void
+    public function test_catalogue_cart_drawer_accessibility(): void
     {
-        $user = User::factory()->create();
-
-        $response = $this->actingAs($user)->get('/minha-conta');
+        $response = $this->get('/produtos');
         $response->assertStatus(200);
 
-        // Tablist and Tab items
-        $response->assertSee('role="tablist"', false);
-        $response->assertSee('role="tab"', false);
-        $response->assertSee('id="tab-btn-info"', false);
-        $response->assertSee('aria-controls="tab-info"', false);
-        $response->assertSee('aria-selected="true"', false);
+        // Modal cart drawer semantics (WCAG 2.2 SC 4.1.2)
+        $response->assertSee('role="dialog"', false);
+        $response->assertSee('aria-modal="true"', false);
+        $response->assertSee('aria-labelledby="cartDrawerTitle"', false);
+        $response->assertSee('aria-label="Fechar carrinho"', false);
 
-        // Tabpanels
-        $response->assertSee('id="tab-info"', false);
-        $response->assertSee('role="tabpanel"', false);
-        $response->assertSee('aria-labelledby="tab-btn-info"', false);
-
-        $response->assertSee('id="tab-password"', false);
-        $response->assertSee('role="tabpanel"', false);
-        $response->assertSee('aria-labelledby="tab-btn-password"', false);
-
-        // Password change inputs in profile
-        $response->assertSee('for="profile-current-password"', false);
-        $response->assertSee('id="profile-current-password"', false);
-        $response->assertSee('for="profile-new-password"', false);
-        $response->assertSee('id="profile-new-password"', false);
-        $response->assertSee('autocomplete="new-password"', false);
+        // Live status region for notifications (WCAG 2.2 SC 4.1.3)
+        $response->assertSee('role="status"', false);
+        $response->assertSee('aria-live="polite"', false);
     }
 }
