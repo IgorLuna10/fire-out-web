@@ -236,21 +236,43 @@
       @if(session('error'))
         <div class="alert-error">{{ session('error') }}</div>
       @endif
+      @if(session('success'))
+        <div class="alert-success" style="padding:12px 16px;background:rgba(22,163,74,.08);border:1px solid rgba(22,163,74,.2);border-radius:8px;font-size:13px;color:#15803d;margin-bottom:20px;">
+          {{ session('success') }}
+        </div>
+      @endif
 
       <form method="POST" action="{{ route('login.post') }}">
         @csrf
         <div class="form-group">
-          <label class="form-label">E-mail</label>
+          <label class="form-label" for="login-email">E-mail</label>
           <input class="form-input {{ $errors->has('email') ? 'error' : '' }}"
+                 id="login-email"
                  type="email" name="email" value="{{ old('email') }}"
+                 autocomplete="username"
+                 @error('email') aria-invalid="true" aria-describedby="login-email-error" @enderror
                  placeholder="seu@email.com" required autofocus>
-          @error('email')<div class="form-error">{{ $message }}</div>@enderror
+          @error('email')<div class="form-error" id="login-email-error" role="alert">{{ $message }}</div>@enderror
         </div>
         <div class="form-group">
-          <label class="form-label">Senha</label>
-          <input class="form-input" type="password" name="password"
-                 placeholder="••••••••" required>
-          @error('password')<div class="form-error">{{ $message }}</div>@enderror
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;">
+            <label class="form-label" for="login-password" style="margin-bottom:0;">Senha</label>
+            <a href="{{ route('password.request') }}" style="font-size:12px;color:var(--red);font-weight:600;text-decoration:none;">Esqueceu a senha?</a>
+          </div>
+          <div style="position:relative;">
+            <input class="form-input {{ $errors->has('password') ? 'error' : '' }}"
+                   id="login-password"
+                   type="password" name="password"
+                   autocomplete="current-password"
+                   @error('password') aria-invalid="true" aria-describedby="login-password-error" @enderror
+                   placeholder="••••••••" required style="padding-right:44px;">
+            <button type="button" class="btn-toggle-pwd" aria-label="Mostrar senha" aria-pressed="false"
+                    onclick="togglePasswordVisibility('login-password', this)"
+                    style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--warm);padding:6px;display:flex;align-items:center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          @error('password')<div class="form-error" id="login-password-error" role="alert">{{ $message }}</div>@enderror
         </div>
         <div class="form-check">
           <input type="checkbox" name="remember" id="remember">
@@ -295,4 +317,27 @@
 
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var firstInvalid = document.querySelector('[aria-invalid="true"]');
+  if (firstInvalid) {
+    firstInvalid.focus();
+  }
+});
+
+function togglePasswordVisibility(inputId, btn) {
+  var input = document.getElementById(inputId);
+  if (!input) return;
+  var isPassword = input.type === 'password';
+  input.type = isPassword ? 'text' : 'password';
+  btn.setAttribute('aria-pressed', isPassword ? 'true' : 'false');
+  btn.setAttribute('aria-label', isPassword ? 'Ocultar senha' : 'Mostrar senha');
+  btn.innerHTML = isPassword
+    ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+    : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+}
+</script>
+@endpush
 

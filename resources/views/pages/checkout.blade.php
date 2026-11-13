@@ -248,20 +248,26 @@
         <div class="c-form-group">
           <label class="c-label" for="nome">Nome *</label>
           <input type="text" class="c-input @error('nome') is-invalid @enderror"
-                 id="nome" name="nome" value="{{ old('nome') }}" autocomplete="given-name" required>
+                 id="nome" name="nome" value="{{ old('nome') }}" autocomplete="given-name"
+                 @error('nome') aria-invalid="true" aria-describedby="nome-error" @enderror required>
+          @error('nome')<div id="nome-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
         </div>
         <div class="c-form-group">
           <label class="c-label" for="telefone">Telefone / WhatsApp *</label>
           <input type="tel" class="c-input @error('telefone') is-invalid @enderror"
                  id="telefone" name="telefone" value="{{ old('telefone') }}"
-                 placeholder="(21) 99999-9999" autocomplete="tel" required>
+                 placeholder="(21) 99999-9999" autocomplete="tel"
+                 @error('telefone') aria-invalid="true" aria-describedby="telefone-error" @enderror required>
+          @error('telefone')<div id="telefone-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
         </div>
       </div>
 
       <div class="c-form-group">
         <label class="c-label" for="email">E-mail *</label>
         <input type="email" class="c-input @error('email') is-invalid @enderror"
-               id="email" name="email" value="{{ old('email') }}" autocomplete="email" required>
+               id="email" name="email" value="{{ old('email') }}" autocomplete="email"
+               @error('email') aria-invalid="true" aria-describedby="email-error" @enderror required>
+        @error('email')<div id="email-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
       </div>
 
       <div class="c-form-group">
@@ -270,19 +276,24 @@
       </div>
 
       <div class="c-form-group">
-        <span class="c-label">CPF / CNPJ *</span>
-        <div class="doc-toggle">
-          <button type="button" class="doc-toggle-btn {{ old('document_type','cpf') === 'cpf' ? 'active' : '' }}" onclick="setDocType('cpf',this)">Pessoa Física — CPF</button>
-          <button type="button" class="doc-toggle-btn {{ old('document_type') === 'cnpj' ? 'active' : '' }}"  onclick="setDocType('cnpj',this)">Pessoa Jurídica — CNPJ</button>
+        <label class="c-label" for="documentNumber">CPF / CNPJ *</label>
+        <div class="doc-toggle" role="group" aria-label="Tipo de documento">
+          <button type="button" class="doc-toggle-btn {{ old('document_type','cpf') === 'cpf' ? 'active' : '' }}"
+                  aria-pressed="{{ old('document_type','cpf') === 'cpf' ? 'true' : 'false' }}"
+                  onclick="setDocType('cpf',this)">Pessoa Física — CPF</button>
+          <button type="button" class="doc-toggle-btn {{ old('document_type') === 'cnpj' ? 'active' : '' }}"
+                  aria-pressed="{{ old('document_type') === 'cnpj' ? 'true' : 'false' }}"
+                  onclick="setDocType('cnpj',this)">Pessoa Jurídica — CNPJ</button>
         </div>
         <input type="hidden" name="document_type" id="documentType" value="{{ old('document_type','cpf') }}">
         <input type="text" class="c-input @error('document_number') is-invalid @enderror"
-        id="documentNumber" name="document_number"
+               id="documentNumber" name="document_number"
                value="{{ old('document_number') }}"
                placeholder="{{ old('document_type') === 'cnpj' ? '00.000.000/0000-00' : '000.000.000-00' }}"
                maxlength="{{ old('document_type') === 'cnpj' ? 18 : 14 }}"
-               oninput="maskDoc(this)" autocomplete="off" required>
-        @error('document_number')<div style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
+               oninput="maskDoc(this)"
+               @error('document_number') aria-invalid="true" aria-describedby="document_number-error" @enderror required>
+        @error('document_number')<div id="document_number-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
       </div>
 
       <!-- PAYMENT METHOD -->
@@ -322,43 +333,69 @@
         @endif
           <div class="c-form-row">
             <div class="c-form-group" style="margin-bottom:0;">
-              <label class="c-label">CEP</label>
-              <input type="text" class="c-input @error('cep') is-invalid @enderror" name="cep"
-                     value="{{ old('cep', $defaultAddress?->zipcode) }}" placeholder="00000-000" maxlength="9">
+              <label class="c-label" for="ship-cep">CEP</label>
+              <input type="text" class="c-input @error('cep') is-invalid @enderror"
+                     id="ship-cep" name="cep"
+                     value="{{ old('cep', $defaultAddress?->zipcode) }}"
+                     placeholder="00000-000" maxlength="9" autocomplete="postal-code"
+                     @error('cep') aria-invalid="true" aria-describedby="ship-cep-error" @enderror>
+              @error('cep')<div id="ship-cep-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
             </div>
             <div class="c-form-group" style="margin-bottom:0;">
-              <label class="c-label">Número</label>
-              <input type="text" class="c-input @error('numero') is-invalid @enderror" name="numero"
-                     value="{{ old('numero', $defaultAddress?->number) }}" placeholder="123">
+              <label class="c-label" for="ship-numero">Número</label>
+              <input type="text" class="c-input @error('numero') is-invalid @enderror"
+                     id="ship-numero" name="numero"
+                     value="{{ old('numero', $defaultAddress?->number) }}"
+                     placeholder="123"
+                     @error('numero') aria-invalid="true" aria-describedby="ship-numero-error" @enderror>
+              @error('numero')<div id="ship-numero-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
             </div>
           </div>
           <div class="c-form-group" style="margin-bottom:0;margin-top:14px;">
-            <label class="c-label">Rua / Avenida</label>
-            <input type="text" class="c-input @error('rua') is-invalid @enderror" name="rua"
-                   value="{{ old('rua', $defaultAddress?->street) }}" placeholder="Rua das Flores, Av. Paulista…">
+            <label class="c-label" for="ship-rua">Rua / Avenida</label>
+            <input type="text" class="c-input @error('rua') is-invalid @enderror"
+                   id="ship-rua" name="rua"
+                   value="{{ old('rua', $defaultAddress?->street) }}"
+                   placeholder="Rua das Flores, Av. Paulista…" autocomplete="address-line1"
+                   @error('rua') aria-invalid="true" aria-describedby="ship-rua-error" @enderror>
+            @error('rua')<div id="ship-rua-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
           </div>
           <div class="c-form-row" style="margin-top:14px;">
             <div class="c-form-group" style="margin-bottom:0;">
-              <label class="c-label">Bairro</label>
-              <input type="text" class="c-input @error('bairro') is-invalid @enderror" name="bairro"
-                     value="{{ old('bairro', $defaultAddress?->neighborhood) }}" placeholder="Centro">
+              <label class="c-label" for="ship-bairro">Bairro</label>
+              <input type="text" class="c-input @error('bairro') is-invalid @enderror"
+                     id="ship-bairro" name="bairro"
+                     value="{{ old('bairro', $defaultAddress?->neighborhood) }}"
+                     placeholder="Centro" autocomplete="address-level3"
+                     @error('bairro') aria-invalid="true" aria-describedby="ship-bairro-error" @enderror>
+              @error('bairro')<div id="ship-bairro-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
             </div>
             <div class="c-form-group" style="margin-bottom:0;">
-              <label class="c-label">Complemento <small style="font-weight:400;text-transform:none;letter-spacing:0;">(opcional)</small></label>
-              <input type="text" class="c-input" name="complemento"
-                     value="{{ old('complemento', $defaultAddress?->complement) }}" placeholder="Apto 4, Bloco B…">
+              <label class="c-label" for="ship-complemento">Complemento <small style="font-weight:400;text-transform:none;letter-spacing:0;">(opcional)</small></label>
+              <input type="text" class="c-input"
+                     id="ship-complemento" name="complemento"
+                     value="{{ old('complemento', $defaultAddress?->complement) }}"
+                     placeholder="Apto 4, Bloco B…" autocomplete="address-line2">
             </div>
           </div>
           <div class="c-form-row" style="margin-top:14px;">
             <div class="c-form-group" style="margin-bottom:0;">
-              <label class="c-label">Cidade</label>
-              <input type="text" class="c-input @error('cidade') is-invalid @enderror" name="cidade"
-                     value="{{ old('cidade', $defaultAddress?->city) }}" placeholder="Rio de Janeiro">
+              <label class="c-label" for="ship-cidade">Cidade</label>
+              <input type="text" class="c-input @error('cidade') is-invalid @enderror"
+                     id="ship-cidade" name="cidade"
+                     value="{{ old('cidade', $defaultAddress?->city) }}"
+                     placeholder="Rio de Janeiro" autocomplete="address-level2"
+                     @error('cidade') aria-invalid="true" aria-describedby="ship-cidade-error" @enderror>
+              @error('cidade')<div id="ship-cidade-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
             </div>
             <div class="c-form-group" style="margin-bottom:0;">
-              <label class="c-label">Estado (UF)</label>
-              <input type="text" class="c-input @error('estado') is-invalid @enderror" name="estado"
-                     value="{{ old('estado', $defaultAddress?->state) }}" placeholder="RJ" maxlength="2" style="text-transform:uppercase;">
+              <label class="c-label" for="ship-estado">Estado (UF)</label>
+              <input type="text" class="c-input @error('estado') is-invalid @enderror"
+                     id="ship-estado" name="estado"
+                     value="{{ old('estado', $defaultAddress?->state) }}"
+                     placeholder="RJ" maxlength="2" style="text-transform:uppercase;" autocomplete="address-level1"
+                     @error('estado') aria-invalid="true" aria-describedby="ship-estado-error" @enderror>
+              @error('estado')<div id="ship-estado-error" role="alert" style="font-size:12px;color:#ef4444;margin-top:4px;">{{ $message }}</div>@enderror
             </div>
           </div>
         </div>
@@ -426,8 +463,12 @@ function toggleAddrFields() {
 
 /* ── CPF / CNPJ ── */
 function setDocType(type, btn) {
-  document.querySelectorAll('.doc-toggle-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.doc-toggle-btn').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-pressed', 'false');
+  });
   btn.classList.add('active');
+  btn.setAttribute('aria-pressed', 'true');
   document.getElementById('documentType').value = type;
   const input = document.getElementById('documentNumber');
   input.value = '';
@@ -530,6 +571,11 @@ function mountMPCardForm() {
 document.getElementById('checkoutSubmitForm').addEventListener('submit', function(e) {
   const payMethod = document.getElementById('pagamentoInput').value;
   if (payMethod !== 'cartao' && !_mpCardForm) return; // no MP loaded, submit normally
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const firstInvalid = document.querySelector('[aria-invalid="true"]');
+  if (firstInvalid) firstInvalid.focus();
 });
 </script>
 @endpush

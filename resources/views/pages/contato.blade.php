@@ -236,17 +236,19 @@ textarea.form-input { resize:vertical; min-height:140px; }
           <div class="form-group @error('nome') has-error @enderror">
             <label class="form-label" for="nome">Nome *</label>
             <input type="text" class="form-input @error('nome') is-invalid @enderror"
-                   id="nome" name="nome" value="{{ old('nome') }}" autocomplete="given-name" required>
+                   id="nome" name="nome" value="{{ old('nome') }}" autocomplete="given-name"
+                   @error('nome') aria-invalid="true" aria-describedby="nome-error" @enderror required>
             @error('nome')
-              <div class="form-error" style="display:block;">{{ $message }}</div>
+              <div class="form-error" id="nome-error" role="alert" style="display:block;">{{ $message }}</div>
             @enderror
           </div>
           <div class="form-group @error('sobrenome') has-error @enderror">
             <label class="form-label" for="sobrenome">Sobrenome</label>
             <input type="text" class="form-input @error('sobrenome') is-invalid @enderror"
-                   id="sobrenome" name="sobrenome" value="{{ old('sobrenome') }}" autocomplete="family-name">
+                   id="sobrenome" name="sobrenome" value="{{ old('sobrenome') }}" autocomplete="family-name"
+                   @error('sobrenome') aria-invalid="true" aria-describedby="sobrenome-error" @enderror>
             @error('sobrenome')
-              <div class="form-error" style="display:block;">{{ $message }}</div>
+              <div class="form-error" id="sobrenome-error" role="alert" style="display:block;">{{ $message }}</div>
             @enderror
           </div>
         </div>
@@ -254,18 +256,20 @@ textarea.form-input { resize:vertical; min-height:140px; }
         <div class="form-group @error('email') has-error @enderror">
           <label class="form-label" for="email">E-mail *</label>
           <input type="email" class="form-input @error('email') is-invalid @enderror"
-                 id="email" name="email" value="{{ old('email') }}" autocomplete="email" required>
+                 id="email" name="email" value="{{ old('email') }}" autocomplete="email"
+                 @error('email') aria-invalid="true" aria-describedby="email-error" @enderror required>
           @error('email')
-            <div class="form-error" style="display:block;">{{ $message }}</div>
+            <div class="form-error" id="email-error" role="alert" style="display:block;">{{ $message }}</div>
           @enderror
         </div>
 
         <div class="form-group @error('mensagem') has-error @enderror">
           <label class="form-label" for="mensagem">Mensagem *</label>
           <textarea class="form-input @error('mensagem') is-invalid @enderror"
-                    id="mensagem" name="mensagem" rows="5" required>{{ old('mensagem') }}</textarea>
+                    id="mensagem" name="mensagem" rows="5"
+                    @error('mensagem') aria-invalid="true" aria-describedby="mensagem-error" @enderror required>{{ old('mensagem') }}</textarea>
           @error('mensagem')
-            <div class="form-error" style="display:block;">{{ $message }}</div>
+            <div class="form-error" id="mensagem-error" role="alert" style="display:block;">{{ $message }}</div>
           @enderror
         </div>
 
@@ -287,6 +291,8 @@ textarea.form-input { resize:vertical; min-height:140px; }
     const ta = document.getElementById('mensagem');
     if (ta) ta.value = msg;
   }
+  const firstInvalid = document.querySelector('[aria-invalid="true"]');
+  if (firstInvalid) firstInvalid.focus();
 })();
 </script>
 @endpush

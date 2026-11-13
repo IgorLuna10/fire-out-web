@@ -9,10 +9,11 @@
 .profile-header p { font-size:15px; color:var(--warm); margin-top:4px; }
 .profile-grid { display:grid; grid-template-columns:260px 1fr; gap:32px; align-items:start; }
 .profile-nav { background:#fff; border-radius:16px; border:1.5px solid rgba(0,0,0,.07); overflow:hidden; position:sticky; top:calc(var(--nav-h) + 20px); }
-.profile-nav-item { display:flex; align-items:center; gap:10px; padding:14px 20px; font-size:14px; font-weight:500; color:var(--warm); border-bottom:1px solid rgba(0,0,0,.05); cursor:pointer; transition:background .15s, color .15s; }
+.profile-nav-item { display:flex; align-items:center; gap:10px; padding:14px 20px; font-size:14px; font-weight:500; color:var(--warm); background:none; border:none; border-bottom:1px solid rgba(0,0,0,.05); cursor:pointer; transition:background .15s, color .15s; width:100%; text-align:left; font-family:inherit; }
 .profile-nav-item:last-child { border-bottom:none; }
 .profile-nav-item:hover { background:var(--off); color:var(--ink); }
 .profile-nav-item.active { color:var(--red); font-weight:700; background:rgba(215,43,43,.04); }
+.profile-nav-item:focus-visible { outline: 2.5px solid var(--red); outline-offset:-2px; position:relative; z-index:2; }
 .profile-nav-item svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; flex-shrink:0; }
 .profile-section { display:none; }
 .profile-section.active { display:block; }
@@ -74,56 +75,71 @@
 
   <div class="profile-grid">
     <!-- SIDE NAV -->
-    <nav class="profile-nav">
-      <div class="profile-nav-item active" onclick="showTab('info',this)">
-        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <div class="profile-nav" role="tablist" aria-label="Navegação da conta">
+      <button type="button" role="tab" id="tab-btn-info" aria-controls="tab-info" aria-selected="true" tabindex="0" class="profile-nav-item active" onclick="showTab('info',this)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         Meus Dados
-      </div>
-      <div class="profile-nav-item" onclick="showTab('addresses',this)">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </button>
+      <button type="button" role="tab" id="tab-btn-addresses" aria-controls="tab-addresses" aria-selected="false" tabindex="-1" class="profile-nav-item" onclick="showTab('addresses',this)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Endereços
-      </div>
-      <div class="profile-nav-item" onclick="showTab('orders',this)">
-        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+      </button>
+      <button type="button" role="tab" id="tab-btn-orders" aria-controls="tab-orders" aria-selected="false" tabindex="-1" class="profile-nav-item" onclick="showTab('orders',this)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
         Meus Pedidos
-      </div>
-      <div class="profile-nav-item" onclick="showTab('password',this)">
-        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </button>
+      <button type="button" role="tab" id="tab-btn-password" aria-controls="tab-password" aria-selected="false" tabindex="-1" class="profile-nav-item" onclick="showTab('password',this)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
         Alterar Senha
-      </div>
+      </button>
       <form method="POST" action="{{ route('logout') }}" style="margin:0;">
         @csrf
-        <button type="submit" class="profile-nav-item" style="width:100%;text-align:left;background:none;border:none;cursor:pointer;color:var(--warm);">
-          <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <button type="submit" class="profile-nav-item" style="color:var(--warm);">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
           Sair
         </button>
       </form>
-    </nav>
+    </div>
 
     <!-- CONTENT -->
     <div>
 
       <!-- INFO TAB -->
-      <div class="profile-section active" id="tab-info">
+      <div class="profile-section active" id="tab-info" role="tabpanel" tabindex="0" aria-labelledby="tab-btn-info">
         <div class="card">
           <div class="card-title">MEUS DADOS</div>
           <form method="POST" action="{{ route('profile.info') }}">
             @csrf
             <div class="form-row2">
               <div class="form-group">
-                <label class="form-label">Nome completo</label>
-                <input class="form-input" type="text" name="name" value="{{ old('name', $user->name) }}" required>
-                @error('name')<div class="form-error">{{ $message }}</div>@enderror
+                <label class="form-label" for="profile-name">Nome completo</label>
+                <input class="form-input {{ $errors->has('name') ? 'error' : '' }}"
+                       id="profile-name"
+                       type="text" name="name" value="{{ old('name', $user->name) }}"
+                       autocomplete="name"
+                       @error('name') aria-invalid="true" aria-describedby="profile-name-error" @enderror
+                       required>
+                @error('name')<div class="form-error" id="profile-name-error" role="alert">{{ $message }}</div>@enderror
               </div>
               <div class="form-group">
-                <label class="form-label">Telefone / WhatsApp</label>
-                <input class="form-input" type="tel" name="phone" value="{{ old('phone', $user->phone) }}">
+                <label class="form-label" for="profile-phone">Telefone / WhatsApp</label>
+                <input class="form-input {{ $errors->has('phone') ? 'error' : '' }}"
+                       id="profile-phone"
+                       type="tel" name="phone" value="{{ old('phone', $user->phone) }}"
+                       autocomplete="tel"
+                       @error('phone') aria-invalid="true" aria-describedby="profile-phone-error" @enderror>
+                @error('phone')<div class="form-error" id="profile-phone-error" role="alert">{{ $message }}</div>@enderror
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">E-mail</label>
-              <input class="form-input" type="email" name="email" value="{{ old('email', $user->email) }}" required>
-              @error('email')<div class="form-error">{{ $message }}</div>@enderror
+              <label class="form-label" for="profile-email">E-mail</label>
+              <input class="form-input {{ $errors->has('email') ? 'error' : '' }}"
+                     id="profile-email"
+                     type="email" name="email" value="{{ old('email', $user->email) }}"
+                     autocomplete="email"
+                     @error('email') aria-invalid="true" aria-describedby="profile-email-error" @enderror
+                     required>
+              @error('email')<div class="form-error" id="profile-email-error" role="alert">{{ $message }}</div>@enderror
             </div>
             <button type="submit" class="btn-save">Salvar Dados</button>
           </form>
@@ -131,7 +147,7 @@
       </div>
 
       <!-- ADDRESSES TAB -->
-      <div class="profile-section" id="tab-addresses">
+      <div class="profile-section" id="tab-addresses" role="tabpanel" tabindex="0" aria-labelledby="tab-btn-addresses">
         <div class="card">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:12px;border-bottom:1.5px solid rgba(0,0,0,.06);">
             <span class="card-title" style="margin:0;padding:0;border:none;">MEUS ENDEREÇOS</span>
@@ -232,13 +248,13 @@
       </div>
 
       <!-- ORDERS TAB -->
-      <div class="profile-section" id="tab-orders">
+      <div class="profile-section" id="tab-orders" role="tabpanel" tabindex="0" aria-labelledby="tab-btn-orders">
         <div class="card">
           <div class="card-title">MEUS PEDIDOS</div>
           @if($orders->isEmpty())
             <p style="color:var(--warm);font-size:14px;">Nenhum pedido realizado ainda. <a href="{{ route('produtos') }}" style="color:var(--red);font-weight:600;">Ver produtos →</a></p>
           @else
-          <table class="orders-table">
+          <table class="orders-table" aria-label="Histórico de pedidos">
             <thead>
               <tr>
                 <th>Nº Pedido</th>
@@ -265,25 +281,66 @@
       </div>
 
       <!-- PASSWORD TAB -->
-      <div class="profile-section" id="tab-password">
+      <div class="profile-section" id="tab-password" role="tabpanel" tabindex="0" aria-labelledby="tab-btn-password">
         <div class="card">
           <div class="card-title">ALTERAR SENHA</div>
           <form method="POST" action="{{ route('profile.password') }}" style="max-width:400px;">
             @csrf
             <div class="form-group">
-              <label class="form-label">Senha atual</label>
-              <input class="form-input {{ $errors->has('current_password') ? 'error' : '' }}" type="password" name="current_password">
-              @error('current_password')<div class="form-error">{{ $message }}</div>@enderror
+              <label class="form-label" for="profile-current-password">Senha atual</label>
+              <div style="position:relative;">
+                <input class="form-input {{ $errors->has('current_password') ? 'error' : '' }}"
+                       id="profile-current-password"
+                       type="password" name="current_password"
+                       autocomplete="current-password"
+                       @error('current_password') aria-invalid="true" aria-describedby="profile-current-password-error" @enderror
+                       required style="padding-right:44px;">
+                <button type="button" class="btn-toggle-pwd" aria-label="Mostrar senha atual" aria-pressed="false"
+                        onclick="togglePasswordVisibility('profile-current-password', this)"
+                        style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--warm);padding:6px;display:flex;align-items:center;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              @error('current_password')<div class="form-error" id="profile-current-password-error" role="alert">{{ $message }}</div>@enderror
             </div>
+
             <div class="form-group">
-              <label class="form-label">Nova senha</label>
-              <input class="form-input {{ $errors->has('password') ? 'error' : '' }}" type="password" name="password" placeholder="Min. 8 caracteres">
-              @error('password')<div class="form-error">{{ $message }}</div>@enderror
+              <label class="form-label" for="profile-new-password">Nova senha</label>
+              <div style="position:relative;">
+                <input class="form-input {{ $errors->has('password') ? 'error' : '' }}"
+                       id="profile-new-password"
+                       type="password" name="password"
+                       autocomplete="new-password"
+                       @error('password') aria-invalid="true" aria-describedby="profile-password-hint profile-new-password-error" @else aria-describedby="profile-password-hint" @enderror
+                       placeholder="Min. 12 caracteres" required style="padding-right:44px;">
+                <button type="button" class="btn-toggle-pwd" aria-label="Mostrar nova senha" aria-pressed="false"
+                        onclick="togglePasswordVisibility('profile-new-password', this)"
+                        style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--warm);padding:6px;display:flex;align-items:center;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              <p id="profile-password-hint" style="font-size:12px;color:var(--warm);margin-top:6px;line-height:1.4;">
+                Mínimo de 12 caracteres. Recomendamos o uso de uma frase secreta.
+              </p>
+              @error('password')<div class="form-error" id="profile-new-password-error" role="alert">{{ $message }}</div>@enderror
             </div>
+
             <div class="form-group">
-              <label class="form-label">Confirmar nova senha</label>
-              <input class="form-input" type="password" name="password_confirmation">
+              <label class="form-label" for="profile-password-confirmation">Confirmar nova senha</label>
+              <div style="position:relative;">
+                <input class="form-input"
+                       id="profile-password-confirmation"
+                       type="password" name="password_confirmation"
+                       autocomplete="new-password"
+                       placeholder="Repita a nova senha" required style="padding-right:44px;">
+                <button type="button" class="btn-toggle-pwd" aria-label="Mostrar confirmação da nova senha" aria-pressed="false"
+                        onclick="togglePasswordVisibility('profile-password-confirmation', this)"
+                        style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--warm);padding:6px;display:flex;align-items:center;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
             </div>
+
             <button type="submit" class="btn-save">Alterar Senha</button>
           </form>
         </div>
@@ -298,10 +355,59 @@
 <script>
 function showTab(tab, el) {
   document.querySelectorAll('.profile-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.profile-nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
-  el.classList.add('active');
+  document.querySelectorAll('.profile-nav button[role="tab"]').forEach(btn => {
+    btn.classList.remove('active');
+    btn.setAttribute('aria-selected', 'false');
+    btn.setAttribute('tabindex', '-1');
+  });
+  var targetSection = document.getElementById('tab-' + tab);
+  if (targetSection) targetSection.classList.add('active');
+  if (el) {
+    el.classList.add('active');
+    el.setAttribute('aria-selected', 'true');
+    el.setAttribute('tabindex', '0');
+  }
 }
+
+function togglePasswordVisibility(inputId, btn) {
+  var input = document.getElementById(inputId);
+  if (!input) return;
+  var isPassword = input.type === 'password';
+  input.type = isPassword ? 'text' : 'password';
+  btn.setAttribute('aria-pressed', isPassword ? 'true' : 'false');
+  btn.setAttribute('aria-label', isPassword ? 'Ocultar senha' : 'Mostrar senha');
+  btn.innerHTML = isPassword
+    ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+    : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  var tabs = Array.from(document.querySelectorAll('.profile-nav button[role="tab"]'));
+  tabs.forEach(function (tab, idx) {
+    tab.addEventListener('keydown', function (e) {
+      var targetIdx = -1;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        targetIdx = (idx + 1) % tabs.length;
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        targetIdx = (idx - 1 + tabs.length) % tabs.length;
+      } else if (e.key === 'Home') {
+        targetIdx = 0;
+      } else if (e.key === 'End') {
+        targetIdx = tabs.length - 1;
+      }
+      if (targetIdx !== -1) {
+        e.preventDefault();
+        tabs[targetIdx].focus();
+        tabs[targetIdx].click();
+      }
+    });
+  });
+
+  var firstInvalid = document.querySelector('[aria-invalid="true"]');
+  if (firstInvalid) {
+    firstInvalid.focus();
+  }
+});
 
 function toggleAddrForm() {
   const form = document.getElementById('addr-form');
@@ -315,7 +421,7 @@ function toggleAddrForm() {
 // Auto-open form if there was a validation error on address fields
 @if($errors->hasAny(['street','number','neighborhood','city','state','zipcode','label']))
   document.addEventListener('DOMContentLoaded', () => {
-    showTab('addresses', document.querySelector('[onclick*="addresses"]'));
+    showTab('addresses', document.querySelector('#tab-btn-addresses'));
     toggleAddrForm();
   });
 @endif

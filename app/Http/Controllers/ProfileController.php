@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
 {
@@ -31,7 +33,10 @@ class ProfileController extends Controller
     {
         $request->validate([
             'current_password' => 'required',
-            'password'         => 'required|min:8|confirmed',
+            'password'         => ['required', 'confirmed', Password::min(12)->uncompromised()],
+        ], [
+            'password.min'            => 'A nova senha deve conter no mínimo 12 caracteres.',
+            'password.uncompromised' => 'A senha escolhida apareceu em vazamentos públicos de credenciais. Escolha uma senha diferente.',
         ]);
 
         if (!Hash::check($request->current_password, auth()->user()->password)) {
@@ -39,6 +44,10 @@ class ProfileController extends Controller
         }
 
         auth()->user()->update(['password' => Hash::make($request->password)]);
+
+        Auth::logoutOtherDevices($request->password);
+        $request->session()->regenerate();
+
         return back()->with('success', 'Senha alterada com sucesso.');
     }
 

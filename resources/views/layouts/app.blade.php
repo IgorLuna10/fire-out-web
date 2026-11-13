@@ -57,13 +57,37 @@
     @endif
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" href="{{ asset('img/logo/icon.webp') }}" type="image/webp">
+    <style>
+      .skip-link {
+        position: absolute;
+        top: -100px;
+        left: 16px;
+        background: #d72b2b;
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 14px;
+        text-decoration: none;
+        z-index: 99999;
+        transition: top .15s ease-in-out;
+        box-shadow: 0 4px 14px rgba(0,0,0,.25);
+      }
+      .skip-link:focus {
+        top: 16px;
+        outline: 3px solid #fff;
+        outline-offset: 2px;
+      }
+    </style>
     @stack('styles')
 </head>
 <body>
 
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
     @include('components.header')
 
-    <main>
+    <main id="main-content" tabindex="-1">
         @yield('content')
     </main>
 

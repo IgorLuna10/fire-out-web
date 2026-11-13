@@ -30,9 +30,9 @@
     @endauth
     <a href="{{ route('contato') }}" class="btn-nav">Solicitar Orçamento</a>
   </div>
-  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <button class="nav-hamburger" aria-label="Menu principal" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button>
 </nav>
-<nav class="nav-mobile-menu">
+<nav class="nav-mobile-menu" id="mobile-nav" aria-label="Navegação móvel">
   <a href="{{ route('home') }}">Fire Out</a>
   <a href="{{ route('porta-corta-fogo') }}">Portas Corta-Fogo</a>
   <a href="{{ route('produtos') }}">Produtos</a>

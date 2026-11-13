@@ -528,18 +528,18 @@
 <div class="shop-bar">
   <div class="shop-bar-inner">
     <div class="view-btns">
-      <button class="view-btn active" id="btnGrid" onclick="setView('grid')" title="Vista em grade">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      
-      <button class="view-btn" id="btnList" onclick="setView('list')" title="Vista em lista">
-        <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-      
+      <button class="view-btn active" id="btnGrid" onclick="setView('grid')" aria-label="Vista em grade" aria-pressed="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      </button>
+      <button class="view-btn" id="btnList" onclick="setView('list')" aria-label="Vista em lista" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      </button>
     </div>
-    <button class="bar-cart-btn" onclick="openCartDrawer()">
-      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+    <button class="bar-cart-btn" onclick="openCartDrawer()" aria-label="Abrir meu carrinho de orçamento">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
       Meu Carrinho
       <span class="bar-cart-count" id="cartCount">0</span>
-    
+    </button>
   </div>
 </div>
 
@@ -890,28 +890,28 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
 
 <!-- CART DRAWER -->
 <div class="cart-backdrop" id="cartBackdrop" onclick="closeCartDrawer()"></div>
-<div class="cart-drawer" id="cartDrawer">
+<div class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle">
   <div class="cart-header">
-    <span class="cart-title">MEU ORÇAMENTO</span>
-    <button class="cart-close" onclick="closeCartDrawer()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <h2 class="cart-title" id="cartDrawerTitle" style="margin:0;font-size:inherit;font-weight:inherit;">MEU ORÇAMENTO</h2>
+    <button class="cart-close" onclick="closeCartDrawer()" aria-label="Fechar carrinho"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div class="cart-items-list" id="cartItemsList"></div>
   <div class="cart-footer">
     <p class="cart-summary" id="cartSummary">0 itens no orçamento</p>
     <button class="cart-checkout" id="cartCheckoutBtn" onclick="cartCheckout()" disabled>
-      <svg viewBox="0 0 24 24"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
       Finalizar Pedido
-    
+    </button>
     <button class="cart-send" id="cartSendBtn" onclick="cartSendWA()" disabled>
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
       Enviar via WhatsApp
-    
-    <button class="cart-clear" onclick="cartClear()">Limpar lista
+    </button>
+    <button class="cart-clear" onclick="cartClear()">Limpar lista</button>
   </div>
 </div>
 
 <!-- TOAST -->
-<div class="cart-toast" id="cartToast"></div>
+<div class="cart-toast" id="cartToast" role="status" aria-live="polite"></div>
 
 <!-- Hidden form for checkout POST -->
 <form id="checkoutForm" action="{{ route('checkout.store') }}" method="POST" style="display:none">
@@ -929,12 +929,30 @@ $dp = fn(string $sku) => optional($dbPrices->get($sku))->price_formatted ?? 'Sob
 <script>
 /* ── VIEW TOGGLE ── */
 function setView(v) {
-  document.querySelector('.shop-body').classList.toggle('list-view', v === 'list');
-  document.getElementById('btnGrid').classList.toggle('active', v === 'grid');
-  document.getElementById('btnList').classList.toggle('active', v === 'list');
+  const body = document.querySelector('.shop-body');
+  if (body) body.classList.toggle('list-view', v === 'list');
+  const btnGrid = document.getElementById('btnGrid');
+  const btnList = document.getElementById('btnList');
+  if (btnGrid) {
+    btnGrid.classList.toggle('active', v === 'grid');
+    btnGrid.setAttribute('aria-pressed', v === 'grid' ? 'true' : 'false');
+  }
+  if (btnList) {
+    btnList.classList.toggle('active', v === 'list');
+    btnList.setAttribute('aria-pressed', v === 'list' ? 'true' : 'false');
+  }
   try { localStorage.setItem('shopView', v); } catch(e) {}
 }
 (function(){ try { if (localStorage.getItem('shopView') === 'list') setView('list'); } catch(e) {} })();
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const drawer = document.getElementById('cartDrawer');
+    if (drawer && drawer.classList.contains('open')) {
+      closeCartDrawer();
+    }
+  }
+});
 
 /* ── CATALOGUE ── */
 const catalogue = {
@@ -1187,15 +1205,15 @@ function cartUpdateUI() {
         <div class="cart-item-name">${item.name}</div>
         ${item.variant ? `<div class="cart-item-variant">${item.variant}</div>` : ''}
         <div class="cart-qty">
-          <button onclick="cartQtyChange('${item.key}',-1)">−</button>
+          <button type="button" aria-label="Diminuir quantidade de ${item.name}" onclick="cartQtyChange('${item.key}',-1)">−</button>
           <span>${item.qty}</span>
-          <button onclick="cartQtyChange('${item.key}',+1)">+</button>
+          <button type="button" aria-label="Aumentar quantidade de ${item.name}" onclick="cartQtyChange('${item.key}',+1)">+</button>
         </div>
       </div>
       <div class="cart-item-right">
         ${subStr ? `<div class="cart-item-subtotal">${subStr}</div>` : `<div class="cart-item-consulta">Sob consulta</div>`}
         <div class="cart-item-unit">${unitStr}</div>
-        <button class="cart-remove" onclick="cartRemove('${item.key}')">×
+        <button type="button" class="cart-remove" aria-label="Remover ${item.name} do orçamento" onclick="cartRemove('${item.key}')">×</button>
       </div>
     </div>`;
   }).join('');

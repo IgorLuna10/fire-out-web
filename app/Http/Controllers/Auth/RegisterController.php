@@ -7,21 +7,31 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
     public function show()
     {
         if (Auth::check()) return redirect()->route('profile');
+        session(['register_form_time' => now()->timestamp]);
         return view('auth.register');
     }
 
     public function register(Request $request)
     {
-        $this->validateCaptcha($request);
+        // Honeypot check
+        if ($request->filled('website_hp')) {
+            return back()->withErrors(['name' => 'Acesso inválido detectado.'])->withInput();
+        }
+
+        // Timing check (min 2 seconds)
+        $formTime = session('register_form_time');
+        if ($formTime && (now()->timestamp - $formTime < 2)) {
+            return back()->withErrors(['name' => 'Envio muito rápido. Por favor, aguarde um instante e envie novamente.'])->withInput();
+        }
 
         $data = $request->validate([
             'name'     => 'required|string|min:2|max:100',
@@ -30,15 +40,12 @@ class RegisterController extends Controller
             'password' => [
                 'required',
                 'confirmed',
-                'min:8',
-                'regex:/[a-z]/',
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/',
-                'regex:/[@$!%*?&#]/',
+                Password::min(12)->uncompromised(),
             ],
         ], [
-            'phone.regex'    => 'Informe um telefone válido com DDD. Ex: (21) 98765-4321',
-            'password.regex' => 'A senha deve conter letras maiúsculas, minúsculas, números e um símbolo (@$!%*?&#).',
+            'phone.regex'            => 'Informe um telefone válido com DDD. Ex: (21) 98765-4321',
+            'password.min'            => 'A senha deve conter no mínimo 12 caracteres.',
+            'password.uncompromised' => 'A senha escolhida apareceu em vazamentos públicos de credenciais. Escolha uma senha diferente.',
         ]);
 
         $user = User::create([
@@ -67,28 +74,5 @@ class RegisterController extends Controller
         }
 
         return redirect()->route('profile');
-    }
-
-    private function validateCaptcha(Request $request): void
-    {
-        $siteSecret = config('services.recaptcha.secret');
-
-        if (! $siteSecret) {
-            return;
-        }
-
-        $token = $request->input('recaptcha_token');
-
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret'   => $siteSecret,
-            'response' => $token,
-            'remoteip' => $request->ip(),
-        ]);
-
-        $result = $response->json();
-
-        if (! ($result['success'] ?? false) || ($result['score'] ?? 0) < 0.5) {
-            abort(422, 'Verificação de segurança falhou. Tente novamente.');
-        }
     }
 }
