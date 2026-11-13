@@ -25,41 +25,41 @@ header('Content-Type: text/html; charset=utf-8');
   if (function_exists('opcache_reset')) {
       $reset = @opcache_reset();
       echo "<p class='ok'>✓ OPcache do PHP limpo com sucesso! (" . ($reset ? 'true' : 'false') . ")</p>";
-  } else {
-      echo "<p>ℹ OPcache não está ativo nesta versão do PHP.</p>";
   }
 
   $dir = __DIR__;
   $homeVendor = '/home/fireout/fire-out/vendor/autoload.php';
-  $relVendor = $dir . '/../fire-out/vendor/autoload.php';
 
-  echo "<h3>Verificação de Pastas:</h3>";
-  echo "<p><strong>__DIR__:</strong> <code>$dir</code></p>";
-
-  echo "<p><strong>1. /home/fireout/fire-out/vendor/autoload.php:</strong> ";
+  echo "<h3>Verificação de Arquivos:</h3>";
+  echo "<p><strong>1. Autoload:</strong> ";
   if (file_exists($homeVendor)) {
       echo "<span class='ok'>ENCONTRADO ✓</span> (" . filesize($homeVendor) . " bytes)</p>";
   } else {
       echo "<span class='bad'>NÃO ENCONTRADO ✗</span></p>";
   }
 
-  echo "<p><strong>2. Caminho relativo (../fire-out/vendor/autoload.php):</strong> ";
-  if (file_exists($relVendor)) {
+  // 2. Check CSS manifest and compiled file
+  $manifestFile = $dir . '/build/manifest.json';
+  echo "<p><strong>2. Vite Manifest (/www/build/manifest.json):</strong> ";
+  if (file_exists($manifestFile)) {
+      $manifest = json_decode(file_get_contents($manifestFile), true);
+      $cssRel = $manifest['resources/css/app.css']['file'] ?? null;
       echo "<span class='ok'>ENCONTRADO ✓</span></p>";
+      echo "<p>— Arquivo CSS apontado: <code>" . htmlspecialchars($cssRel ?? 'N/A') . "</code><br>";
+      $fullCssPath = $dir . '/build/' . $cssRel;
+      if ($cssRel && file_exists($fullCssPath)) {
+          echo "— Arquivo no disco: <span class='ok'>ENCONTRADO ✓</span> (" . filesize($fullCssPath) . " bytes)</p>";
+      } else {
+          echo "— Arquivo no disco: <span class='bad'>NÃO ENCONTRADO NO DISCO ✗</span> (Envie a pasta public/build para /www/build!)</p>";
+      }
   } else {
-      echo "<span class='bad'>NÃO ENCONTRADO ✗</span></p>";
+      echo "<span class='bad'>NÃO ENCONTRADO ✗</span> (Envie a pasta public/build para /www/build!)</p>";
   }
 
-  $indexFile = $dir . '/index.php';
-  if (file_exists($indexFile)) {
-      $lines = file($indexFile);
-      echo "<h3>Conteúdo de /www/index.php (linhas 1 a 20):</h3>";
-      echo "<pre>";
-      for ($i = 0; $i < min(20, count($lines)); $i++) {
-          echo ($i + 1) . ": " . htmlspecialchars($lines[$i]);
-      }
-      echo "</pre>";
-  }
+  // 3. Check HTTPS detection
+  $proto = $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? $_SERVER['REQUEST_SCHEME'] ?? 'http';
+  $https = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') || $proto === 'https';
+  echo "<p><strong>3. Protocolo HTTPS:</strong> " . ($https ? "<span class='ok'>ATIVO (https) ✓</span>" : "<span class='bad'>INATIVO (http) - Pode causar bloqueio de CSS</span>") . "</p>";
   ?>
 
   <br>

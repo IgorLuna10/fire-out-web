@@ -5,6 +5,12 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+// Ensure HTTPS is recognized when behind Cloudflare / Reverse Proxy
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+    $_SERVER['HTTPS'] = 'on';
+    $_SERVER['SERVER_PORT'] = 443;
+}
+
 // Locate Laravel application root:
 // 1. Production cPanel server: /home/fireout/fire-out (DocumentRoot is /home/fireout/www)
 // 2. Relative sibling: /www/../fire-out

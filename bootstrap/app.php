@@ -22,7 +22,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
                     Request::HEADER_X_FORWARDED_PROTO
             );
         } else {
-            $middleware->trustProxies(at: []);
+            $middleware->trustProxies(at: '*');
         }
 
         $middleware->authenticateSessions();
