@@ -22,6 +22,19 @@
   max-width:880px; margin:0 auto; position:relative; z-index:1;
   text-align:center; display:flex; flex-direction:column; align-items:center;
 }
+.hero-logo-badge {
+  margin-bottom:20px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.hero-logo-badge img {
+  width:96px;
+  height:96px;
+  object-fit:contain;
+  display:block;
+  filter:drop-shadow(0 4px 14px rgba(0,0,0,.06));
+}
 .hero-eyebrow {
   display:inline-flex; align-items:center; gap:10px;
   font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase;
@@ -183,6 +196,7 @@
   .page-hero-inner { max-width:100%; }
 }
 @media(max-width:600px) {
+  .hero-logo-badge img { width:76px; height:76px; }
   .page-hero { padding:56px 20px 68px; }
   .hero-actions { flex-direction:column; width:100%; }
   .hero-actions .btn-red,
@@ -201,6 +215,9 @@
 <!-- HERO -->
 <div class="page-hero">
   <div class="page-hero-inner">
+    <div class="hero-logo-badge">
+      <img src="{{ asset('img/logo/logo-transparent.webp') }}" alt="Fire Out" width="96" height="96">
+    </div>
     <div class="hero-eyebrow">Engenharia de Combate a Incêndio</div>
     <h1>PROJETOS.<br>MANUTENÇÃO.<br><span>INSTALAÇÃO.</span></h1>
     <p class="page-hero-sub">Engenharia especializada em combate a incêndio. Oferecemos execução técnica rigorosa para garantir a proteção total do seu patrimônio e total conformidade para a emissão e renovação de AVCB.</p>
